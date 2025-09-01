@@ -12,12 +12,12 @@
     "autoprefixer": "10.4.20",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
-    "next": "15.3.4",
+    "next": "15.5.2",
     "next-auth": "5.0.0-beta.29",
     "postcss": "8.5.1",
     "postgres": "^3.4.6",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3",
     "use-debounce": "^10.0.4",
@@ -26,10 +26,10 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "22.10.7",
-    "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "eslint": "^9.29.0",
-    "eslint-config-next": "15.3.4"
+    "eslint-config-next": "15.5.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -38,6 +38,10 @@
     ],
     "ignoredBuiltDependencies": [
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "@types/react": "19.1.12",
+      "@types/react-dom": "19.1.9"
+    }
   }
 }
