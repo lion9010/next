@@ -1,7 +1,7 @@
 import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString('es-CO', {
+  return (amount / 100).toLocaleString('es-MX', {
     style: 'currency',
     currency: 'COP',
   });
@@ -9,7 +9,7 @@ export const formatCurrency = (amount: number) => {
 
 export const formatDateToLocal = (
   dateStr: string,
-  locale: string = 'es-CO',
+  locale: string = 'es-MX',
 ) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
