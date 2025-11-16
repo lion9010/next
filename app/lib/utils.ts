@@ -1,15 +1,28 @@
 import { Revenue } from './definitions';
 
-export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString('es-MX', {
+const FRACTIONDIGITS = 0;
+
+export const CURRENCY = 'COP';
+export const LOCALE = 'es-CO';
+
+export const longFormatCurrency = (amount: number) => {
+  return (amount / 100).toLocaleString(LOCALE, {
     style: 'currency',
-    currency: 'COP',
+    currency: CURRENCY,
+  });
+};
+
+export const formatCurrency = (amount: number) => {
+  return (amount / 100).toLocaleString(LOCALE, {
+    style: 'currency',
+    currency: CURRENCY,
+    minimumFractionDigits: FRACTIONDIGITS,
   });
 };
 
 export const formatDateToLocal = (
   dateStr: string,
-  locale: string = 'es-MX',
+  locale: string = LOCALE,
 ) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
