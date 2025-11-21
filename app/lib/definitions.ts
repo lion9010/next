@@ -2,6 +2,50 @@
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
+import * as z from 'zod';
+
+export const SignupFormSchema = z.object({
+  name: z.string()
+    .min(2, 'Muy corto')
+    .trim(),
+  email: z.email('Invalid email address')
+    .trim(),
+  password: z
+    .preprocess((value) => (value === null || value === undefined ? '' : value),
+      z.string()
+        .min(6, 'Password must be at least 6 characters long')
+        .regex(/[a-zA-Z]/, { error: 'Contain at least one letter.' })
+        .regex(/[0-9]/, { error: 'Contain at least one number.' })
+        .regex(/[^a-zA-Z0-9]/, {
+          error: 'Contain at least one special character.',
+        })
+        .trim()
+    ),
+  confirmPassword: z
+    .preprocess((value) => (value === null || value === undefined ? '' : value),
+      z.string()
+        .trim()
+    ),
+})
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+
+  });
+
+export type FormState =
+  | {
+    errors?: {
+      name?: string[]
+      email?: string[]
+      password?: string[]
+      confirmPassword?: string[]
+    }
+    message?: string
+  }
+  | undefined;
+
+
 export type User = {
   id: string;
   name: string;
