@@ -42,10 +42,15 @@ export async function signup(state: FormState, formData: FormData) {
             password: tree.properties?.password?.errors,
             confirmPassword: tree.properties?.confirmPassword?.errors,
         };
+        const formDataObj: { [key: string]: string | null } = {};
+        formData.forEach((value, key) => {
+            formDataObj[key] = value?.toString() || null;
+        });
 
 
         return {
             errors: fieldErrors,
+            formErrors: formDataObj,
             message: 'Please fix the errors in the form.',
         }
     }
