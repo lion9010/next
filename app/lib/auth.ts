@@ -6,6 +6,7 @@ import { error } from 'console';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import * as z from 'zod';
+import bcrypt from 'bcrypt';
 
 export async function authenticate(
     prevState: string | undefined,
@@ -54,4 +55,7 @@ export async function signup(state: FormState, formData: FormData) {
             message: 'Please fix the errors in the form.',
         }
     }
+
+    const { name, email, password } = validatedFields.data;
+    const hashedPassword = await bcrypt.hash(password, 10);
 }
