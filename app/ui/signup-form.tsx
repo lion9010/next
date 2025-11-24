@@ -6,12 +6,14 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
   UserIcon,
+  ServerStackIcon,
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
 import { useActionState } from "react";
 import { signup } from "@/app/lib/auth";
 import { useSearchParams } from "next/navigation";
+import { Server } from "http";
 
 export default function SignupForm() {
   const [state, action, isPending] = useActionState(signup, undefined);
@@ -37,7 +39,8 @@ export default function SignupForm() {
                 type="text"
                 name="name"
                 placeholder="Enter your name"
-                defaultValue={state?.formErrors?.name || ''}
+                autoComplete="given-name"
+                defaultValue={state?.formErrors?.name || ""}
                 required
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -61,7 +64,8 @@ export default function SignupForm() {
                 type="email"
                 name="email"
                 placeholder="Enter your email address"
-                defaultValue={state?.formErrors?.email || ''}
+                autoComplete="email"
+                defaultValue={state?.formErrors?.email || ""}
                 required
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -84,7 +88,7 @@ export default function SignupForm() {
                 type="password"
                 name="password"
                 placeholder="Enter password"
-                defaultValue={state?.formErrors?.password || ''}
+                defaultValue={state?.formErrors?.password || ""}
                 required
                 minLength={6}
               />
@@ -115,29 +119,41 @@ export default function SignupForm() {
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password"
-                defaultValue={state?.formErrors?.confirmPassword || ''}
+                defaultValue={state?.formErrors?.confirmPassword || ""}
                 required
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
-          {state?.errors?.confirmPassword && <p className="text-sm text-red-500">{state.errors.confirmPassword}</p>}
+          {state?.errors?.confirmPassword && (
+            <p className="text-sm text-red-500">
+              {state.errors.confirmPassword}
+            </p>
+          )}
         </div>
         <input type="hidden" name="redirectTo" />
         <Button className="mt-4 w-full" disabled={isPending}>
-          {isPending ? "Enviando..." : "Enviar"}<ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          {isPending ? "Enviando..." : "Enviar"}
+          <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
-          {state?.errors && (
-            <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{state.message}</p>
-            </>
+          {state?.message && (
+            <div className="flex items-center gap-2 text-red-600">
+              <ExclamationCircleIcon className="h-5 w-5" />
+              <p className="text-sm">{state.message}</p>
+            </div>
+          )}
+
+          {state?.errorDB && (
+            <div className="flex items-center gap-2 text-red-600">
+              <ServerStackIcon className="h-5 w-5" />
+              <p className="text-sm">{state.errorDB}</p>
+            </div>
           )}
         </div>
       </div>

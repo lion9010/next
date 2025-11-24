@@ -1,5 +1,5 @@
 import Pagination from '@/app/ui/invoices/pagination';
-import { fetchInvoicesPages } from '@/app/lib/data';
+import { fetchInvoicesPages } from '@/app/lib/data/index';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';

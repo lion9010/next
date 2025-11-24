@@ -1,11 +1,6 @@
-import Image from 'next/image';
-import { lusitana } from '@/app/ui/fonts';
-import Search from '@/app/ui/search';
-import {
-  CustomersTableType,
-  FormattedCustomersTable,
-} from '@/app/lib/definitions';
-import { formatCurrency } from '@/app/lib/utils';
+import Image from "next/image";
+import { FormattedCustomersTable } from "@/app/lib/definitions";
+import { formatCurrency } from "@/app/lib/utils";
 
 export default async function CustomersTable({
   customers,
@@ -14,10 +9,6 @@ export default async function CustomersTable({
 }) {
   return (
     <div className="w-full">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
-        Customers
-      </h1>
-      <Search placeholder="Search customers..." />
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
@@ -72,13 +63,22 @@ export default async function CustomersTable({
                     <th scope="col" className="px-3 py-5 font-medium">
                       Email
                     </th>
-                    <th scope="col" className="px-3 py-5 font-medium text-center">
+                    <th
+                      scope="col"
+                      className="px-3 py-5 font-medium text-center"
+                    >
                       Total Invoices
                     </th>
-                    <th scope="col" className="px-3 py-5 font-medium  text-right">
+                    <th
+                      scope="col"
+                      className="px-3 py-5 font-medium  text-right"
+                    >
                       Total Pending
                     </th>
-                    <th scope="col" className="px-4 py-5 font-medium  text-right">
+                    <th
+                      scope="col"
+                      className="px-4 py-5 font-medium  text-right"
+                    >
                       Total Paid
                     </th>
                   </tr>
