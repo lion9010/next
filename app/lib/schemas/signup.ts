@@ -1,0 +1,30 @@
+import { z } from 'zod';
+
+export const SignupFormSchema = z.object({
+    name: z.string()
+        .min(2, 'Muy corto')
+        .trim(),
+    email: z.email('Invalid email address')
+        .trim(),
+    password: z
+        .preprocess((value) => (value === null || value === undefined ? '' : value),
+            z.string()
+                .min(6, 'Password must be at least 6 characters long')
+                .regex(/[a-zA-Z]/, { error: 'Contain at least one letter.' })
+                .regex(/[0-9]/, { error: 'Contain at least one number.' })
+                .regex(/[^a-zA-Z0-9]/, {
+                    error: 'Contain at least one special character.',
+                })
+                .trim()
+        ),
+    confirmPassword: z
+        .preprocess((value) => (value === null || value === undefined ? '' : value),
+            z.string()
+                .trim()
+        ),
+})
+    .refine((data) => data.password === data.confirmPassword, {
+        message: 'El password y la confirmación no coinciden.',
+        path: ['confirmPassword'],
+
+    });

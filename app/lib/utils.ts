@@ -1,4 +1,4 @@
-import { Revenue } from './definitions';
+import { Revenue } from './types';
 
 const FRACTIONDIGITS = 0;
 

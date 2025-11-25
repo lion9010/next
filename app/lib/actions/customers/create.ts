@@ -1,29 +1,14 @@
 'use server';
 
-import { z } from 'zod';
 import postgres from 'postgres';
+import { CustomerFormSchema } from '@/app/lib/schemas';
+import { CustomerFormState } from '@/app/lib/types';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
-const FormSchema = z.object({
-    id: z.string(),
-    name: z.string().min(1, 'El nombre es obligatorio'),
-    email: z.email('Introduce un correo electrónico válido'),
-    imageUrl: z.url('Introduce una URL válida para la imagen').optional(),
-});
+const CreateCustomer = CustomerFormSchema.omit({ id: true });
 
-const CreateCustomer = FormSchema.omit({ id: true });
-
-export type State = {
-    errors?: {
-        name?: string[];
-        email?: string[];
-        imageUrl?: string[];
-    };
-    message?: string | null;
-};
-
-export async function createCustomer(prevState: State, formData: FormData) {
+export async function createCustomer(prevState: CustomerFormState, formData: FormData) {
     const validatedFields = CreateCustomer.safeParse({
         name: formData.get('name'),
         email: formData.get('email'),

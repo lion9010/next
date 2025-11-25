@@ -1,5 +1,5 @@
 import { sql, ITEMS_PER_PAGE } from './index';
-import { InvoicesTable, InvoiceForm } from '../definitions';
+import { InvoicesTable, InvoiceForm } from '@/app/lib/types';
 
 
 export async function fetchFilteredInvoices(

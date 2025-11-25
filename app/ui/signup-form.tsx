@@ -11,9 +11,7 @@ import {
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
 import { useActionState } from "react";
-import { signup } from "@/app/lib/auth";
-import { useSearchParams } from "next/navigation";
-import { Server } from "http";
+import { signup } from "@/app/lib/actions/users/create";
 
 export default function SignupForm() {
   const [state, action, isPending] = useActionState(signup, undefined);

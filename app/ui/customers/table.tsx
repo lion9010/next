@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { FormattedCustomersTable } from "@/app/lib/definitions";
-import { formatCurrency } from "@/app/lib/utils";
+import { FormattedCustomersTable } from "@/app/lib/types";
 
 export default async function CustomersTable({
   customers,

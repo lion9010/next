@@ -1,5 +1,5 @@
 import {sql } from './index';
-import { Revenue, LatestInvoiceRaw } from '../definitions';
+import { Revenue, LatestInvoiceRaw } from '@/app/lib/types';
 import { formatCurrency } from '../utils';
 
 export async function fetchRevenue() {

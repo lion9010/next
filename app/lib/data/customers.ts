@@ -1,6 +1,6 @@
 import { sql } from './index';
-import { CustomerField, CustomersTableType } from '../definitions';
-import { formatCurrency } from '../utils';
+import { CustomerField, CustomersTableType } from '@/app/lib/types';
+import { formatCurrency } from '@/app/lib/utils';
 
 export async function fetchCustomers() {
     try {
