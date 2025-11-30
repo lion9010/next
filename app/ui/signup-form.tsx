@@ -1,5 +1,7 @@
 "use client";
 
+import { useActionState, useState } from "react";
+
 import { lusitana } from "@/app/ui/fonts";
 import {
   AtSymbolIcon,
@@ -7,14 +9,18 @@ import {
   ExclamationCircleIcon,
   UserIcon,
   ServerStackIcon,
+  BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
+
 import { Button } from "@/app/ui/button";
-import { useActionState } from "react";
 import { signup } from "@/app/lib/actions/users/create";
+
+import { SwitchToggle } from "./utils/switch-toggle";
 
 export default function SignupForm() {
   const [state, action, isPending] = useActionState(signup, undefined);
+  let [checked, setChecked] = useState(false);
 
   return (
     <form action={action} className="space-y-3">
@@ -23,6 +29,16 @@ export default function SignupForm() {
           Please sign up to continue.
         </h1>
         <div className="w-full">
+          <SwitchToggle
+            checkedInitial={checked}
+            onChange={setChecked}
+            textLeft="Persona Natural"
+            textRight="Persona Juridica"
+            iconLeft={<UserIcon className="h-[18px] w-[18px]" />}
+            iconRight={<BuildingOffice2Icon className="h-[18px] w-[18px]" />}
+            name="personType"
+            title="Yo soy una persona:"
+          />
           <div>
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
@@ -36,6 +52,7 @@ export default function SignupForm() {
                 id="name"
                 type="text"
                 name="name"
+                autoCapitalize="words"
                 placeholder="Enter your name"
                 autoComplete="given-name"
                 defaultValue={state?.formErrors?.name || ""}

@@ -1,16 +1,29 @@
+import postgres from 'postgres';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from './auth.config';
-import { z } from 'zod';
-import type { User } from '@/app/lib/types';
 import bcrypt from 'bcrypt';
-import postgres from 'postgres';
+import { z } from 'zod';
+
+import type { User } from '@/app/lib/types';
+
+import { authConfig } from './auth.config';
  
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
  
 async function getUser(email: string): Promise<User | undefined> {
   try {
-    const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
+    const user = await sql<User[]>
+    `SELECT
+      cp.person_id AS id,
+      cp.value AS email,
+      np.given_name AS name,
+      p.password
+    FROM contact_point AS cp
+    INNER JOIN natural_person AS np ON cp.person_id = np.id
+    INNER JOIN person AS p ON cp.person_id = p.id
+    WHERE value=${email};
+    `;
+    console.log('Fetched user:', user);
     return user[0];
   } catch (error) {
     console.error('Failed to fetch user:', error);
@@ -24,7 +37,9 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
+          .object({ 
+            email: z.email(), 
+            password: z.string().min(6) })
           .safeParse(credentials);
  
         if (parsedCredentials.success) {

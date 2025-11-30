@@ -3,7 +3,9 @@
 const users = [
   {
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
+    type: 'natural',
     name: 'User',
+    contactType: 'email',
     email: 'user@nextmail.com',
     password: '123456',
   },
@@ -52,13 +54,13 @@ const invoices = [
   {
     customer_id: customers[0].id,
     amount: 15795,
-    status: 'pending',
+    status: 'due',
     date: '2022-12-06',
   },
   {
     customer_id: customers[1].id,
     amount: 20348,
-    status: 'pending',
+    status: 'due',
     date: '2022-11-14',
   },
   {
@@ -76,19 +78,19 @@ const invoices = [
   {
     customer_id: customers[5].id,
     amount: 34577,
-    status: 'pending',
+    status: 'due',
     date: '2023-08-05',
   },
   {
     customer_id: customers[2].id,
     amount: 54246,
-    status: 'pending',
+    status: 'due',
     date: '2023-07-16',
   },
   {
     customer_id: customers[0].id,
     amount: 666,
-    status: 'pending',
+    status: 'due',
     date: '2023-06-27',
   },
   {

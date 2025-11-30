@@ -13,6 +13,7 @@ import { PostgresError } from 'postgres';
 export async function signup(state: SignupFormState, formData: FormData) {
 
     const validatedFields = SignupFormSchema.safeParse({
+        personType: formData.get('personType'),
         name: formData.get('name'),
         email: formData.get('email'),
         password: formData.get('password'),
@@ -42,10 +43,13 @@ export async function signup(state: SignupFormState, formData: FormData) {
     const { name, email, password } = validatedFields.data;
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
-        const data = await sql <{ id: UUID }[]>`
+        const data = await sql <{ id: UUID }[]>
+        `
         INSERT INTO users (name, email, password)
         VALUES (${name}, ${email}, ${hashedPassword})
-        RETURNING id`;
+        RETURNING id;
+
+        `;
 
         return { success: true, id: data[0].id };
     } catch (error: PostgresError | any) {
