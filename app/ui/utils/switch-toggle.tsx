@@ -33,6 +33,7 @@ export function SwitchToggle({
           relative
           focus:bg-blue-600
           hover:bg-blue-400
+          ${checkedInitial ? 'bg-green-600 hover:bg-green-500 before:translate-x-5' : ''}
           before:absolute before:top-0.5 before:left-0.5
           before:h-4 before:w-4 before:rounded-full before:bg-white
           before:transition-all
