@@ -48,7 +48,7 @@ export default function SignupForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-transform:capitalize;"
                 id="name"
                 type="text"
                 name="name"
@@ -74,7 +74,7 @@ export default function SignupForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-transform:lowercase;"
                 id="email"
                 type="email"
                 name="email"
@@ -153,7 +153,7 @@ export default function SignupForm() {
           <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
         <div
-          className="flex h-8 items-end space-x-1"
+          className="mt-4 flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >

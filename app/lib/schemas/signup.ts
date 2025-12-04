@@ -1,10 +1,14 @@
 import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
-    name: z.string()
+    name: z
+        .string()
         .min(2, 'Muy corto')
+        .max(100, 'Muy largo')
         .trim(),
-    email: z.email('Invalid email address')
+    email: z
+        .email('Invalid email address')
+        .toLowerCase()
         .trim(),
     password: z
         .preprocess((value) => (value === null || value === undefined ? '' : value),

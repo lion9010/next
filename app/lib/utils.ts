@@ -80,3 +80,27 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export function capitalizeSentence(str: string): string {
+    if (!str || str.trim() === '') {
+        return ''; // Retorna una cadena vacía si la entrada es nula o solo espacios
+    }
+
+    // 1. Recortar espacios y convertir todo a minúsculas para normalizar
+    const normalizedStr = str.trim().toLowerCase();
+
+    // 2. Dividir la cadena en palabras usando uno o más espacios como separador
+    const words = normalizedStr.split(/\s+/);
+
+    // 3. Iterar sobre cada palabra y capitalizar solo la primera letra
+    const capitalizedWords = words.map(word => {
+        if (word.length === 0) {
+            return ''; // Maneja el caso de múltiples espacios (aunque .split(/\s+/) lo minimiza)
+        }
+        // Capitaliza: primera letra a MAYÚS + el resto de la palabra
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+
+    // 4. Unir las palabras de nuevo con un solo espacio
+    return capitalizedWords.join(' ');
+}
