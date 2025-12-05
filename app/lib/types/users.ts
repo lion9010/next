@@ -12,6 +12,7 @@ export type SignupFormState =
 
 export type User = {
   id: string;
+  type: "natural" | "juridical";
   name: string;
   email: string;
   password: string;

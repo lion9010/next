@@ -12,19 +12,42 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
  
 async function getUser(email: string): Promise<User | undefined> {
   try {
-    const user = await sql<User[]>
-    `SELECT
-      cp.person_id AS id,
-      cp.value AS email,
-      np.given_name AS name,
-      p.password
-    FROM contact_point AS cp
-    INNER JOIN natural_person AS np ON cp.person_id = np.id
-    INNER JOIN person AS p ON cp.person_id = p.id
-    WHERE value=${email};
-    `;
-    console.log('Fetched user:', user);
-    return user[0];
+    return await sql.begin( async (sql) => {
+      email = email.toLowerCase();
+      const personType = await sql<User[]>
+      `SELECT type FROM person 
+      INNER JOIN contact_point ON person.id = contact_point.person_id
+      WHERE value=${email};
+      `;
+
+      // ⭐️ COMPROBACIÓN CLAVE: Si el array está vacío, devolvemos undefined
+      if (personType.length === 0) {
+        console.log('User not found for email:', email);
+        return undefined; // Retorna undefined de la transacción (y de getUser)
+      }
+
+      const [tabla, columna] = personType[0].type === 'natural'
+        ? ['natural_person', 'given_name']
+        : ['juridical_person', 'commercial_name'];
+
+
+      const user = await sql<User[]>
+      `SELECT
+        cp.person_id AS id,
+        cp.value AS email,
+        tb.${sql(columna)} AS name,
+        p.type AS type,
+        p.password
+      FROM contact_point AS cp
+      INNER JOIN ${sql(tabla)} AS tb ON cp.person_id = tb.id
+      INNER JOIN person AS p ON cp.person_id = p.id
+      WHERE value=${email};
+      `;
+      console.log('Fetched user:', user[0]);
+      
+      return user[0];
+    } 
+  );
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
