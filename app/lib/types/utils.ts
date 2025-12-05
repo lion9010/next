@@ -8,3 +8,8 @@ export interface SwitchToggleProps {
     name?: string;
     title?: string;
 }
+
+export interface PasswordVisibilityProps {
+    visible: boolean;
+    toggleVisibility: () => void;
+}

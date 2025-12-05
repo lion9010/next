@@ -17,7 +17,7 @@ export const SignupFormSchema = z.object({
                 .regex(/[a-zA-Z]/, { error: 'Contain at least one letter.' })
                 .regex(/[0-9]/, { error: 'Contain at least one number.' })
                 .regex(/[^a-zA-Z0-9]/, {
-                    error: 'Contain at least one special character.',
+                    error: 'Debe contener al menos un carácter especial.',
                 })
                 .trim()
         ),

@@ -12,7 +12,7 @@ export default function SignupPage() {
           </div>
         </div>
         <Suspense>
-          <Signup />
+          <Signup/>
         </Suspense>
       </div>
     </main>

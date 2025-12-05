@@ -1,5 +1,8 @@
 'use client';
  
+import { useActionState, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -7,10 +10,11 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from '@/app/ui/button';
-import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/auth';
-import { useSearchParams } from 'next/navigation';
+
+import { Button } from '@/app/ui/button';
+import { PasswordVisibility } from './utils/password-visibility';
+
  
 export default function LoginForm() {
   const searchParams = useSearchParams();
@@ -19,6 +23,7 @@ export default function LoginForm() {
     authenticate,
     undefined,
   );
+  const [visible, setVisible] = useState(false);
  
   return (
     <form action={formAction} className="space-y-3">
@@ -57,13 +62,14 @@ export default function LoginForm() {
               <input
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="password"
-                type="password"
+                type= {visible ? "text" : "password"}
                 name="password"
                 placeholder="Enter password"
                 required
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <PasswordVisibility visible={visible} toggleVisibility={() => setVisible(!visible)} />
             </div>
           </div>
         </div>

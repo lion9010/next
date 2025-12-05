@@ -5,10 +5,12 @@ import { SignupFormSchema } from '@/app/lib/schemas/index';
 import { SignupFormState } from '@/app/lib/types/index';
 import bcrypt from 'bcrypt';
 import { sql } from '@/app/lib/data';
-import { UUID } from 'crypto';
 import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
 import { capitalizeSentence } from '../../utils';
+import { signIn } from '@/auth';
+import { redirect } from 'next/navigation';
+import { AuthError } from 'next-auth';
 
 
 export async function signup(state: SignupFormState, formData: FormData) {
@@ -82,13 +84,36 @@ export async function signup(state: SignupFormState, formData: FormData) {
                 VALUES (${id[0].id}, ${capitalizedName});
             `;
             // Si todo funciona, la librería hará automáticamente el COMMIT aquí.
-            return { success: true, id: id[0].id };
-        })
-            ;
+            // return { success: true, id: id[0].id };
+        });
 
+        // Después de la creación, iniciar sesión automáticamente
+        await signIn('credentials', {
+            redirect: false,
+            email: email,
+            password: password,
+        });
+        
+        
     } catch (error: PostgresError | any) {
+        
+        // 1. 🛑 PRIORIDAD: RELANZAR LA REDIRECCIÓN DE NEXT.JS
+        // Si el error es la excepción lanzada por `redirect()` (ej. si el signIn fallara y llamara a redirect)
+        // o si accidentalmente la llamada a `redirect` estuviera dentro del try/catch anidado.
+        if (error.message.includes('NEXT_REDIRECT')) {
+            throw error;
+        }
+
+        // 2. MANEJO DE ERRORES DE AUTENTICACIÓN (Auth.js)
+        if (error instanceof AuthError) {
+             // Esto captura fallos específicos del signIn, aunque es improbable si el usuario acaba de ser creado
+             return { error: 'Failed to automatically sign in after registration.' };
+        }
+        
+        // 3. MANEJO DE ERRORES DE NEGOCIO Y BASE DE DATOS (Tu lógica original)
+        // Si la creación de la cuenta falla (ej. restricción de unicidad de email)
         return {
-            errorDB: parsePgError(error),
+            errorDB: parsePgError(error), // Asume que esta función parsea errores de Postgres
             formErrors: {
                 name,
                 email,
@@ -97,4 +122,5 @@ export async function signup(state: SignupFormState, formData: FormData) {
             },
         };
     }
+    redirect('/dashboard');
 }

@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 
 import { lusitana } from "@/app/ui/fonts";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import {
   AtSymbolIcon,
   KeyIcon,
@@ -11,16 +12,18 @@ import {
   ServerStackIcon,
   BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 
 import { Button } from "@/app/ui/button";
 import { signup } from "@/app/lib/actions/users/create";
 
 import { SwitchToggle } from "./utils/switch-toggle";
+import { PasswordVisibility } from "./utils/password-visibility";
 
 export default function SignupForm() {
   const [state, action, isPending] = useActionState(signup, undefined);
-  let [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
 
   return (
     <form action={action} className="space-y-3">
@@ -48,7 +51,7 @@ export default function SignupForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-transform:capitalize;"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 capitalize"
                 id="name"
                 type="text"
                 name="name"
@@ -100,7 +103,7 @@ export default function SignupForm() {
               <input
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="password"
-                type="password"
+                type={visible ? "text" : "password"}
                 name="password"
                 placeholder="Enter password"
                 defaultValue={state?.formErrors?.password || ""}
@@ -108,6 +111,7 @@ export default function SignupForm() {
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <PasswordVisibility visible={visible} toggleVisibility={() => setVisible(!visible)} />
             </div>
           </div>
           {state?.errors?.password && (
@@ -131,7 +135,7 @@ export default function SignupForm() {
               <input
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="confirmPassword"
-                type="password"
+                type={visibleConfirm ? "text" : "password"}
                 name="confirmPassword"
                 placeholder="Confirm password"
                 defaultValue={state?.formErrors?.confirmPassword || ""}
@@ -139,6 +143,7 @@ export default function SignupForm() {
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <PasswordVisibility visible={visibleConfirm} toggleVisibility={() => setVisibleConfirm(!visibleConfirm)} />
             </div>
           </div>
           {state?.errors?.confirmPassword && (
