@@ -43,7 +43,6 @@ async function getUser(email: string): Promise<User | undefined> {
       INNER JOIN person AS p ON cp.person_id = p.id
       WHERE value=${email};
       `;
-      console.log('Fetched user:', user[0]);
       
       return user[0];
     } 
