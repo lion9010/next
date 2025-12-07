@@ -7,6 +7,7 @@ export interface SwitchToggleProps {
     iconRight?: React.ReactElement;
     name?: string;
     title?: string;
+    className?: string;
 }
 
 export interface PasswordVisibilityProps {

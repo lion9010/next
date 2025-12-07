@@ -45,6 +45,7 @@ export function SwitchToggle({
           checked:outline-green-600
           `}
           name={name}
+          id= {name}
           checked={checkedInitial}
           onChange={() => onChange && onChange(!checkedInitial)}
         />
