@@ -216,3 +216,125 @@ export function InvoicesTableSkeleton() {
     </div>
   );
 }
+
+export function LoginFormSkeleton() {
+  return (
+    <div className="space-y-3 animate-pulse">
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+
+        {/* Título */}
+        <div className="h-6 w-48 bg-gray-200 rounded mb-6"></div>
+
+        {/* Email */}
+        <div>
+          <div className="h-3 w-10 bg-gray-200 rounded mb-2 mt-5"></div>
+          <div className="relative">
+            <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
+
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+
+        {/* Password */}
+        <div className="mt-4">
+          <div className="h-3 w-16 bg-gray-200 rounded mb-2 mt-5"></div>
+          <div className="relative">
+            <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
+
+            {/* Ícono izquierda */}
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+
+            {/* Toggle visibility */}
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+
+        {/* Botón */}
+        <div className="mt-4 w-full h-10 bg-gray-300 rounded"></div>
+
+        {/* Mensaje de error */}
+        <div className="flex h-8 items-end space-x-2 mt-2">
+          <div className="h-4 w-4 bg-gray-300 rounded"></div>
+          <div className="h-4 w-32 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SignupFormSkeleton() {
+  return (
+    <div className="space-y-3 animate-pulse">
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-8">
+
+        {/* Título */}
+        <div className="h-6 w-60 bg-gray-200 rounded mb-6"></div>
+
+        <div className="w-full">
+
+          {/* SwitchToggle Skeleton */}
+          <div className="mt-2">
+            <div className="h-3 w-24 bg-gray-200 rounded mb-2"></div>
+
+            <div className="w-full h-10 bg-gray-200 rounded-xl"></div>
+          </div>
+
+          {/* Name */}
+          <div className="mt-6">
+            <div className="h-3 w-10 bg-gray-200 rounded mb-2"></div>
+            <div className="relative">
+              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="mt-6">
+            <div className="h-3 w-12 bg-gray-200 rounded mb-2"></div>
+            <div className="relative">
+              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+
+          {/* Password */}
+          <div className="mt-6">
+            <div className="h-3 w-16 bg-gray-200 rounded mb-2"></div>
+            <div className="relative">
+              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+
+              {/* Icono izquierda */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+
+              {/* Toggle visibility */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+
+          {/* Confirm Password */}
+          <div className="mt-6">
+            <div className="h-3 w-28 bg-gray-200 rounded mb-2"></div>
+            <div className="relative">
+              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+
+              {/* Icono izquierda */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+
+              {/* Toggle visibility */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Botón */}
+        <div className="mt-6 w-full h-10 bg-gray-300 rounded"></div>
+
+        {/* Mensajes debajo del botón */}
+        <div className="mt-4 flex h-8 items-end gap-2">
+          <div className="h-4 w-4 bg-gray-300 rounded"></div>
+          <div className="h-4 w-40 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    </div>
+  );
+}

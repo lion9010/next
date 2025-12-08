@@ -17,7 +17,7 @@ export function SwitchToggle({
   return (
     <div>
       <label
-        className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+        className="mb-3 mt-5 block text-xs font-medium text-[var(--foreground)]"
         htmlFor={name}
       >
         {title}
@@ -28,14 +28,14 @@ export function SwitchToggle({
         <input
           type="checkbox"
           className= {`
-          border-gray-400
+          border-[var(--background)]
           h-5 w-10 mx-5 cursor-pointer rounded-full bg-blue-600 
           relative
           focus:bg-blue-600
           hover:bg-blue-400
           ${checkedInitial ? 'bg-green-600 hover:bg-green-500 before:translate-x-5' : ''}
           before:absolute before:top-0.5 before:left-0.5
-          before:h-4 before:w-4 before:rounded-full before:bg-white
+          before:h-4 before:w-4 before:rounded-full before:bg-[var(--background)]
           before:transition-all
           checked:bg-none
           checked:bg-green-600 
