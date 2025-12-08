@@ -4,8 +4,8 @@ import { Suspense } from 'react';
  
 export default function SignupPage() {
   return (
-    <main className="flex items-center justify-center md:h-screen dark:bg-gradient-to-tr from-[var(--background)] to-black">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+    <main className="py-10 dark:bg-gradient-to-tr from-[var(--background)] to-black flex items-center justify-center">
+      <div className="relative w-full max-w-[400px] flex-col space-y-2.5 p-4">
         <div className="flex h-20 w-full items-end rounded-lg bg-[var(--primary)] p-3 md:h-36">
           <div className="w-32 text-white md:w-36">
             <AcmeLogo />

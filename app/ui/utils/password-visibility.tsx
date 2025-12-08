@@ -11,7 +11,7 @@ export function PasswordVisibility({ visible, toggleVisibility }: PasswordVisibi
         className="absolute right-3 top-1/2 -translate-y-1/2"
         aria-label={visible ? "Hide password" : "Show password"}
     >
-        {visible ? (<EyeSlashIcon className="h-5 w-5 text-gray-500" />) : (<EyeIcon className="h-5 w-5 text-gray-500" />)}
+        {visible ? (<EyeSlashIcon className="h-5 w-5 text-[var(--muted-foreground)] focus:text-[var(--primary)]" />) : (<EyeIcon className="h-5 w-5 text-[var(--muted-foreground)] focus:text-[var(--primary)]" />)}
     </button>
   );
 }
