@@ -1,8 +1,9 @@
-export default function AcmeLogo() {
-  const [st0, st1, st2, st3] = ['#002146', '#006E96', '#FF8300', '#033378' ];
+
+
+export default function AcmeLogo({className}:{className?:string}) {
  
   return (
-    <svg className="h-full md:h-20 w-30" x="0px" y="0px" viewBox="0 0 792 310.5">
+    <svg className={`h-full md:h-20 w-30 ${className}`} x="0px" y="0px" viewBox="0 0 792 310.5">
       
       <g className="fill-white">
         <g>

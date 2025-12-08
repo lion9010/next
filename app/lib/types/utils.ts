@@ -5,6 +5,8 @@ export interface SwitchToggleProps {
     textRight?: string;
     iconLeft?: React.ReactElement;
     iconRight?: React.ReactElement;
+    colorLeft?: string;
+    colorRight?: string;
     name?: string;
     title?: string;
     className?: string;

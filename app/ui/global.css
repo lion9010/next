@@ -41,7 +41,9 @@ input[type="number"]::-webkit-outer-spin-button {
     --accent-values: 73.643% 0.10747 0.14928;
     --accent: oklab(var(--accent-values));
     --accent-foreground: oklch(0.21 0.006 285.885);
-    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-values: 0.577 0.245 27.325;
+    --destructive: oklch(var(--destructive-values));
+    --destructive-background: oklch(var(--destructive-values)/0.5);
     --border: oklch(0.92 0.004 286.32);
     --input: oklch(0.92 0.004 286.32);
     --ring: oklch(0.708 0 0);
@@ -79,7 +81,9 @@ input[type="number"]::-webkit-outer-spin-button {
     --muted-foreground: oklch(0.705 0.015 286.067);
     --accent: oklch(73.643% 0.18395 54.249);
     --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
+    --destructive-values: 0.704 0.191 22.216;
+    --destructive: oklch(var(--destructive-values));
+    --destructive-background: oklch(var(--destructive-values)/0.3);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);

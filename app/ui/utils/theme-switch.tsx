@@ -5,7 +5,7 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 import { SwitchToggleProps } from "@/app/lib/types";
 import { useTheme } from "next-themes";
 
-export function ThemeSwitch({ className }: SwitchToggleProps) {
+export function ThemeSwitch({ className, colorRight, colorLeft }: SwitchToggleProps) {
 
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -28,8 +28,8 @@ export function ThemeSwitch({ className }: SwitchToggleProps) {
       >
       <span className="cursor-pointer flex items-center">
         {isDark 
-          ? <MoonIcon className="w-6 h-6" /> 
-          : <SunIcon className="w-6 h-6 text-white" />
+          ? <MoonIcon className={`w-6 h-6 ${colorLeft}`} /> 
+          : <SunIcon className={`w-6 h-6 ${colorRight}`} />
         }
       </span>
     </div>

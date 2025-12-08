@@ -11,7 +11,7 @@ export default function Page() {
     <main className="flex min-h-screen flex-col p-6 dark:bg-gradient-to-tr from-[var(--background)] to-black">
       <div className="flex h-20 shrink-0 items-end justify-between rounded-lg bg-[var(--primary)] py-6 px-6 md:h-52 md:pl-20">
         <AcmeLogo />
-        <ThemeSwitch className="md:h-full"/>
+        <ThemeSwitch className="md:h-full" colorRight="text-white"/>
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-[var(--card)] px-6 py-10 md:w-2/5 md:px-20">
