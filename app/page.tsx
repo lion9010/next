@@ -8,32 +8,32 @@ import { ThemeSwitch } from "./ui/utils/theme-switch";
 
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end justify-between rounded-lg bg-blue-500 dark:bg-blue-900 py-6 px-6 md:h-52 md:pl-20">
+    <main className="flex min-h-screen flex-col p-6 dark:bg-gradient-to-tr from-[var(--background)] to-black">
+      <div className="flex h-20 shrink-0 items-end justify-between rounded-lg bg-[var(--primary)] py-6 px-6 md:h-52 md:pl-20">
         <AcmeLogo />
         <ThemeSwitch className="md:h-full"/>
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
+        <div className="flex flex-col justify-center gap-6 rounded-lg bg-[var(--card)] px-6 py-10 md:w-2/5 md:px-20">
           <div className={styles.shape} />
           <p
-            className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
+            className={`${lusitana.className} text-xl text-[var(--foreground)] md:text-3xl md:leading-normal`}
           >
             <strong>Welcome to Acme.</strong> This is the example for the{" "}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
+            <a href="https://nextjs.org/learn/" className="text-[var(--accent)]">
               Next.js Learn Course
             </a>
             , brought to you by Vercel.
           </p>
           <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+            className="flex items-center gap-5 self-start rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-30)] md:text-base"
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
           <Link
             href="/signup"
-            className="flex items-center gap-5 self-start rounded-lg bg-transparent px-6 py-3 text-sm font-medium text-blue-500 border border-blue-500 transition-colors hover:bg-blue-100 md:text-base"
+            className="flex items-center gap-5 self-start rounded-lg bg-transparent px-6 py-3 text-sm font-medium text-[var(--primary)] border border-[var(--primary)] transition-colors hover:bg-[var(--primary-30)] md:text-base"
           >
             <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
