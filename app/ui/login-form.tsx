@@ -1,6 +1,6 @@
 'use client';
  
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { lusitana } from '@/app/ui/fonts';
@@ -24,9 +24,17 @@ export default function LoginForm() {
     undefined,
   );
   const [visible, setVisible] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isValid, setIsValid] = useState(false);
+
+  const handleInput = () => {
+    if (formRef.current) {
+      setIsValid(formRef.current.checkValidity())
+    }
+  }
  
   return (
-    <form action={formAction}>
+    <form action={formAction} ref={formRef}>
       <div className="flex-1 rounded-lg bg-[var(--card)] px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
@@ -47,6 +55,7 @@ export default function LoginForm() {
                 name="email"
                 placeholder="Enter your email address"
                 autoComplete='email'
+                onInput={handleInput}
                 required
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
@@ -63,11 +72,12 @@ export default function LoginForm() {
               <input
                 className="peer dark:bg-[var(--secondary-30)] block w-full rounded-md border border-[var(--secondary)] py-[9px] pl-10 text-sm outline-2 placeholder:text-[var(--muted-foreground)]"
                 id="password"
-                type= {visible ? "text" : "password"}
                 name="password"
                 placeholder="Enter password"
-                required
                 minLength={6}
+                type= {visible ? "text" : "password"}
+                onInput={handleInput}
+                required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
               <PasswordVisibility visible={visible} toggleVisibility={() => setVisible(!visible)} />
@@ -75,8 +85,8 @@ export default function LoginForm() {
           </div>
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        <Button className="mt-6 w-full" disabled={isPending || isValid}>
+          Log in <ArrowRightIcon className="ml-auto h-5 w-5" />
         </Button>
         <div
           className="flex h-8 items-end space-x-1"
