@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import NavLinks from '@/app/ui/dashboard/nav-links';
-import AcmeLogo from '@/app/ui/acme-logo';
-import { PowerIcon } from '@heroicons/react/24/outline';
-import { signOut } from '@/auth';
-import { ThemeSwitch } from '../utils/theme-switch';
+import Link from "next/link";
+import NavLinks from "@/app/ui/dashboard/nav-links";
+import AcmeLogo from "@/app/ui/acme-logo";
+import { PowerIcon } from "@heroicons/react/24/outline";
+import { signOut } from "@/auth";
+import { ThemeSwitch } from "../utils/theme-switch";
 
 export default function SideNav() {
   return (
@@ -13,8 +13,10 @@ export default function SideNav() {
         href="/"
       >
         <div className="w-full text-white md:w-40 flex flex-row justify-between">
-          <AcmeLogo className="w-32"/>
-          <ThemeSwitch className="md:hidden"/>
+          <AcmeLogo className="w-32" />
+          <div className="md:hidden">
+            <ThemeSwitch />
+          </div>
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
@@ -22,8 +24,8 @@ export default function SideNav() {
         <div className="hidden h-auto w-full grow rounded-md bg-[var(--background)] md:block"></div>
         <form
           action={async () => {
-            'use server';
-            await signOut({ redirectTo: '/' });
+            "use server";
+            await signOut({ redirectTo: "/" });
           }}
         >
           <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-[var(--background)] p-3 text-sm font-medium hover:bg-[var(--destructive-background)] hover:text-[var(--destructive)] md:flex-none md:justify-start md:p-2 md:px-3">

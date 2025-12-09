@@ -168,7 +168,7 @@ export default function SignupForm() {
         <input type="hidden" name="redirectTo" />
         <Button 
           disabled={isPending || isValid}
-          className="mt-6 w-full" 
+          className={`mt-6 w-full ${isValid? "text-white":""}`} 
         >
           {isPending ? "Enviando..." : "Enviar"}
           <ArrowRightIcon className="ml-auto h-5 w-5" />

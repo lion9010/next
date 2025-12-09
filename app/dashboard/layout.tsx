@@ -8,7 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <SideNav />
       </div>
       <div className="flex-grow px-6 md:overflow-y-auto md:px-12 md:py-6">
-        <ThemeSwitch className="hidden md:flex md:justify-end md:text-[var(--ring)]" />
+        <div className="hidden md:flex md:justify-end md:text-[var(--ring)]">
+          <ThemeSwitch />
+        </div>
         <div>{children}</div>
       </div>
     </div>

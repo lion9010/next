@@ -85,7 +85,7 @@ export default function LoginForm() {
           </div>
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
-        <Button className="mt-6 w-full" disabled={isPending || isValid}>
+        <Button className={`mt-6 w-full ${isValid? "text-white":""}`} disabled={isPending || isValid}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5" />
         </Button>
         <div
