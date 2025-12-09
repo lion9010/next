@@ -25,18 +25,21 @@ export default function Page() {
             </a>
             , brought to you by Vercel.
           </p>
+          <div className="flex w-fit flex-col gap-6">
+
           <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-30)] md:text-base"
+            className="flex w-full items-center gap-5 self-start rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-30)] md:text-base"
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
           <Link
             href="/signup"
-            className="flex items-center gap-5 self-start rounded-lg bg-transparent px-6 py-3 text-sm font-medium text-[var(--primary)] border border-[var(--primary)] transition-colors hover:bg-[var(--primary-30)] md:text-base"
+            className="flex gap-5 self-start rounded-lg bg-transparent px-6 py-3 text-sm font-medium text-[var(--primary)] border border-[var(--primary)] transition-colors hover:bg-[var(--primary-30)] md:text-base"
           >
             <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
+          </div>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           {/* Add Hero Images Here */}
