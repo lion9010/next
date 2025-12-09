@@ -31,7 +31,7 @@ input[type="number"]::-webkit-outer-spin-button {
     --primary-values: 33.952% -0.02406 -0.12545;
     --primary: oklab(var(--primary-values));
     --primary-30: oklab(var(--primary-values)/0.3);
-    --primary-foreground: oklch(0.97 0.014 254.604);
+    --primary-foreground: oklch(33.952% 0.12773 259.144);
     --secondary-values: 50.595% -0.06321 -0.08248;
     --secondary: oklab(var(--secondary-values));
     --secondary-30: oklab(var(--secondary-values)/0.3);
