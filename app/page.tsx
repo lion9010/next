@@ -29,7 +29,7 @@ export default function Page() {
 
           <Link
             href="/login"
-            className="flex w-full items-center gap-5 self-start rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-30)] md:text-base"
+            className="flex w-full justify-between gap-5 self-start rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-30)] md:text-base"
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
