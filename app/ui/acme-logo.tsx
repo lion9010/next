@@ -1,9 +1,12 @@
+import Link from "next/link";
 
 
 export default function AcmeLogo({className}:{className?:string}) {
  
   return (
-    <svg className={`h-full md:h-20 w-30 ${className}`} x="0px" y="0px" viewBox="0 0 792 310.5">
+    <Link href="/" className={`flex ${className}`}>
+
+    <svg className="h-full w-full" x="0px" y="0px" viewBox="0 0 792 310.5">
       
       <g className="fill-white">
         <g>
@@ -56,5 +59,6 @@ export default function AcmeLogo({className}:{className?:string}) {
         />
       </g>
     </svg>
+    </Link>
   );
 }

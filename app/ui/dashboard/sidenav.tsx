@@ -8,17 +8,14 @@ import { ThemeSwitch } from "../utils/theme-switch";
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
-        <div className="mb-2 h-20 w-full text-white flex flex-row justify-between bg-[var(--primary)] rounded-md p-4 md:h-40 md:justify-start">
-      <Link
-        className="flex  items-end"
-        href="/"
-      >
-          <AcmeLogo className="w-32" />
-      </Link>
-          <div className="md:hidden">
-            <ThemeSwitch />
-          </div>
+      <div className="mb-2 h-20 text-white flex flex-row justify-between bg-[var(--primary)] rounded-md p-4 md:h-40 md:flex-col-reverse">
+        <div className="flex h:full md:h-fit">
+          <AcmeLogo className="md:h-16" />
         </div>
+        <div className="md:hidden">
+          <ThemeSwitch />
+        </div>
+      </div>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-[var(--background)] md:block"></div>
