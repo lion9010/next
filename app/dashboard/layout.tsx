@@ -1,7 +1,12 @@
 import SideNav from "@/app/ui/dashboard/sidenav";
 import { ThemeSwitch } from "../ui/utils/theme-switch";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/auth/auth-options";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+
+
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden dark:bg-gradient-to-br from-[var(--background)] to-black">
       <div className="w-full flex-none md:w-64">
