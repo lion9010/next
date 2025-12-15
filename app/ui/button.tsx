@@ -10,8 +10,8 @@ export function Button({ children, className, disabled, ...rest }: ButtonProps) 
     <button
       {...rest}
       className={clsx(
-        `flex h-10 items-center rounded-lg px-4 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] active:bg-[var(--primary)] aria-disabled:cursor-not-allowed aria-disabled:opacity-50 
-        ${isValid? "bg-[var(--primary)] hover:bg-[var(--primary-30)] text-[var(--primary-foreground)]" : "border border-[var(--primary-30)] border-opacity-10 bg-[var(--muted)] text-[var(--muted-foreground)] cursor-not-allowed"}`,
+        `flex h-10 items-center rounded-lg px-4 text-sm font-medium transition-colors focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--primary) active:bg-(--primary) aria-disabled:cursor-not-allowed aria-disabled:opacity-50 
+        ${isValid? "bg-(--primary) hover:bg-(--primary-30) text-(--primary-foreground)" : "border border-(--primary-30) border-opacity-10 bg-(--muted) text-(--muted-foreground) cursor-not-allowed"}`,
         className,
       )}
     >

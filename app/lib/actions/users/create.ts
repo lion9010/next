@@ -8,9 +8,9 @@ import { sql } from '@/app/lib/data';
 import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
 import { capitalizeSentence } from '../../utils';
-import { signIn } from '@/auth';
+import { signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { AuthError } from 'next-auth';
+import  AuthError  from 'next-auth';
 
 
 export async function signup(state: SignupFormState, formData: FormData) {
@@ -88,10 +88,10 @@ export async function signup(state: SignupFormState, formData: FormData) {
         });
 
         // Después de la creación, iniciar sesión automáticamente
-        await signIn('credentials', {
-            redirect: false,
-            email: email,
-            password: password,
+        await signIn('db-interna', {
+            email: formData.get("email"),
+            password: formData.get("password"),
+            redirect: true,
         });
         
         

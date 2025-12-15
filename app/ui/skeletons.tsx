@@ -1,18 +1,18 @@
 // Loading animation
 const shimmer =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
+  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-linear-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
 export function CardSkeleton() {
   return (
     <div
-      className={`${shimmer} relative w-full overflow-hidden rounded-xl bg-[var(--card)] p-2 shadow-sm`}
+      className={`${shimmer} relative w-full overflow-hidden rounded-xl bg-(--card) p-2 shadow-xs`}
     >
       <div className="flex p-4">
-        <div className="h-5 w-5 rounded-md bg-[var(--card)]" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-[var(--card)] text-sm font-medium" />
+        <div className="h-5 w-5 rounded-md bg-(--card)" />
+        <div className="ml-2 h-6 w-16 rounded-md bg-(--card) text-sm font-medium" />
       </div>
-      <div className="flex items-center justify-center truncate rounded-xl bg-[var(--background)] px-4 py-8">
-        <div className="h-7 w-20 rounded-md bg-[var(--foreground)]" />
+      <div className="flex items-center justify-center truncate rounded-xl bg-(--background) px-4 py-8">
+        <div className="h-7 w-20 rounded-md bg-(--foreground)" />
       </div>
     </div>
   );
@@ -32,12 +32,12 @@ export function CardsSkeleton() {
 export function RevenueChartSkeleton() {
   return (
     <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>
-      <div className="mb-4 h-8 w-36 rounded-md bg-[var(--card)]" />
-      <div className="rounded-xl bg-[var(--card)] p-4">
-        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-[var(--background)] p-4 md:gap-4" />
+      <div className="mb-4 h-8 w-36 rounded-md bg-(--card)" />
+      <div className="rounded-xl bg-(--card) p-4">
+        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-(--background) p-4 md:gap-4" />
         <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-[var(--card)]" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-[var(--card)]" />
+          <div className="h-5 w-5 rounded-full bg-(--card)" />
+          <div className="ml-2 h-4 w-20 rounded-md bg-(--card)" />
         </div>
       </div>
     </div>
@@ -46,15 +46,15 @@ export function RevenueChartSkeleton() {
 
 export function InvoiceSkeleton() {
   return (
-    <div className="flex flex-row items-center justify-between border-b bg-[var(--card)] py-4">
+    <div className="flex flex-row items-center justify-between border-b bg-(--card) py-4">
       <div className="flex items-center">
-        <div className="mr-2 h-8 w-8 rounded-full bg-[var(--foreground)]" />
+        <div className="mr-2 h-8 w-8 rounded-full bg-(--foreground)" />
         <div className="min-w-0">
-          <div className="h-5 w-40 rounded-md bg-[var(--foreground)]" />
-          <div className="mt-2 h-4 w-12 rounded-md bg-[var(--muted)]" />
+          <div className="h-5 w-40 rounded-md bg-(--foreground)" />
+          <div className="mt-2 h-4 w-12 rounded-md bg-(--muted)" />
         </div>
       </div>
-      <div className="mt-2 h-4 w-12 rounded-md bg-[var(--foreground)]" />
+      <div className="mt-2 h-4 w-12 rounded-md bg-(--foreground)" />
     </div>
   );
 }
@@ -64,9 +64,9 @@ export function LatestInvoicesSkeleton() {
     <div
       className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4`}
     >
-      <div className="mb-4 h-8 w-36 rounded-md bg-[var(--card)]" />
-      <div className="flex grow flex-col justify-between rounded-xl bg-[var(--card)] p-4">
-        <div className="bg-[var(--background)] px-6">
+      <div className="mb-4 h-8 w-36 rounded-md bg-(--card)" />
+      <div className="flex grow flex-col justify-between rounded-xl bg-(--card) p-4">
+        <div className="bg-(--background) px-6">
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <InvoiceSkeleton />
@@ -74,8 +74,8 @@ export function LatestInvoicesSkeleton() {
           <InvoiceSkeleton />
         </div>
         <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-[var(--card)]" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-[var(--card)]" />
+          <div className="h-5 w-5 rounded-full bg-(--card)" />
+          <div className="ml-2 h-4 w-20 rounded-md bg-(--card)" />
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@ export default function DashboardSkeleton() {
   return (
     <>
       <div
-        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-[var(--card)]`}
+        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-(--card)`}
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <CardsSkeleton />
@@ -101,35 +101,35 @@ export default function DashboardSkeleton() {
 
 export function TableRowSkeleton() {
   return (
-    <tr className="w-full border-b border-[var(--primary-30)] last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
+    <tr className="w-full border-b border-(--primary-30) last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
       {/* Customer Name and Image */}
       <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-[var(--primary-30)]"></div>
-          <div className="h-6 w-24 rounded bg-[var(--primary-30)]"></div>
+          <div className="h-8 w-8 rounded-full bg-(--primary-30)"></div>
+          <div className="h-6 w-24 rounded-sm bg-(--primary-30)"></div>
         </div>
       </td>
       {/* Email */}
       <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-32 rounded bg-[var(--primary-30)]"></div>
+        <div className="h-6 w-32 rounded-sm bg-(--primary-30)"></div>
       </td>
       {/* Amount */}
       <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
+        <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
       </td>
       {/* Date */}
       <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
+        <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
       </td>
       {/* Status */}
       <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
+        <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
       </td>
       {/* Actions */}
       <td className="whitespace-nowrap py-3 pl-6 pr-3">
         <div className="flex justify-end gap-3">
-          <div className="h-[38px] w-[38px] rounded bg-[var(--primary-30)]"></div>
-          <div className="h-[38px] w-[38px] rounded bg-[var(--primary-30)]"></div>
+          <div className="h-[38px] w-[38px] rounded-sm bg-(--primary-30)"></div>
+          <div className="h-[38px] w-[38px] rounded-sm bg-(--primary-30)"></div>
         </div>
       </td>
     </tr>
@@ -138,22 +138,22 @@ export function TableRowSkeleton() {
 
 export function InvoicesMobileSkeleton() {
   return (
-    <div className="mb-2 w-full rounded-md bg-[var(--background)] p-4">
-      <div className="flex items-center justify-between border-b border-[var(--primary-30)] pb-8">
+    <div className="mb-2 w-full rounded-md bg-(--background) p-4">
+      <div className="flex items-center justify-between border-b border-(--primary-30) pb-8">
         <div className="flex items-center">
-          <div className="mr-2 h-8 w-8 rounded-full bg-[var(--primary-30)]"></div>
-          <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
+          <div className="mr-2 h-8 w-8 rounded-full bg-(--primary-30)"></div>
+          <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
         </div>
-        <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
+        <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
       </div>
       <div className="flex w-full items-center justify-between pt-4">
         <div>
-          <div className="h-6 w-16 rounded bg-[var(--primary-30)]"></div>
-          <div className="mt-2 h-6 w-24 rounded bg-[var(--primary-30)]"></div>
+          <div className="h-6 w-16 rounded-sm bg-(--primary-30)"></div>
+          <div className="mt-2 h-6 w-24 rounded-sm bg-(--primary-30)"></div>
         </div>
         <div className="flex justify-end gap-2">
-          <div className="h-10 w-10 rounded bg-[var(--primary-30)]"></div>
-          <div className="h-10 w-10 rounded bg-[var(--primary-30)]"></div>
+          <div className="h-10 w-10 rounded-sm bg-(--primary-30)"></div>
+          <div className="h-10 w-10 rounded-sm bg-(--primary-30)"></div>
         </div>
       </div>
     </div>
@@ -164,7 +164,7 @@ export function InvoicesTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-[var(--card)] p-2 md:pt-0">
+        <div className="rounded-lg bg-(--card) p-2 md:pt-0">
           <div className="md:hidden">
             <InvoicesMobileSkeleton />
             <InvoicesMobileSkeleton />
@@ -199,7 +199,7 @@ export function InvoicesTableSkeleton() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-[var(--background)]">
+            <tbody className="bg-(--background)">
               <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />
@@ -220,39 +220,39 @@ export function LoginFormSkeleton() {
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
 
         {/* Título */}
-        <div className="h-6 w-48 bg-gray-200 rounded mb-6"></div>
+        <div className="h-6 w-48 bg-gray-200 rounded-sm mb-6"></div>
 
         {/* Email */}
         <div>
-          <div className="h-3 w-10 bg-gray-200 rounded mb-2 mt-5"></div>
+          <div className="h-3 w-10 bg-gray-200 rounded-sm mb-2 mt-5"></div>
           <div className="relative">
             <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
 
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
           </div>
         </div>
 
         {/* Password */}
         <div className="mt-4">
-          <div className="h-3 w-16 bg-gray-200 rounded mb-2 mt-5"></div>
+          <div className="h-3 w-16 bg-gray-200 rounded-sm mb-2 mt-5"></div>
           <div className="relative">
             <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
 
             {/* Ícono izquierda */}
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
 
             {/* Toggle visibility */}
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
           </div>
         </div>
 
         {/* Botón */}
-        <div className="mt-4 w-full h-10 bg-gray-300 rounded"></div>
+        <div className="mt-4 w-full h-10 bg-gray-300 rounded-sm"></div>
 
         {/* Mensaje de error */}
         <div className="flex h-8 items-end space-x-2 mt-2">
-          <div className="h-4 w-4 bg-gray-300 rounded"></div>
-          <div className="h-4 w-32 bg-gray-200 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded-sm"></div>
+          <div className="h-4 w-32 bg-gray-200 rounded-sm"></div>
         </div>
       </div>
     </div>
@@ -265,71 +265,71 @@ export function SignupFormSkeleton() {
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-8">
 
         {/* Título */}
-        <div className="h-6 w-60 bg-gray-200 rounded mb-6"></div>
+        <div className="h-6 w-60 bg-gray-200 rounded-sm mb-6"></div>
 
         <div className="w-full">
 
           {/* SwitchToggle Skeleton */}
           <div className="mt-2">
-            <div className="h-3 w-24 bg-gray-200 rounded mb-2"></div>
+            <div className="h-3 w-24 bg-gray-200 rounded-sm mb-2"></div>
 
             <div className="w-full h-10 bg-gray-200 rounded-xl"></div>
           </div>
 
           {/* Name */}
           <div className="mt-6">
-            <div className="h-3 w-10 bg-gray-200 rounded mb-2"></div>
+            <div className="h-3 w-10 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
               <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
 
           {/* Email */}
           <div className="mt-6">
-            <div className="h-3 w-12 bg-gray-200 rounded mb-2"></div>
+            <div className="h-3 w-12 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
               <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
 
           {/* Password */}
           <div className="mt-6">
-            <div className="h-3 w-16 bg-gray-200 rounded mb-2"></div>
+            <div className="h-3 w-16 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
               <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
 
               {/* Icono izquierda */}
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
 
               {/* Toggle visibility */}
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
 
           {/* Confirm Password */}
           <div className="mt-6">
-            <div className="h-3 w-28 bg-gray-200 rounded mb-2"></div>
+            <div className="h-3 w-28 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
               <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
 
               {/* Icono izquierda */}
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
 
               {/* Toggle visibility */}
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded"></div>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
         </div>
 
         {/* Botón */}
-        <div className="mt-6 w-full h-10 bg-gray-300 rounded"></div>
+        <div className="mt-6 w-full h-10 bg-gray-300 rounded-sm"></div>
 
         {/* Mensajes debajo del botón */}
         <div className="mt-4 flex h-8 items-end gap-2">
-          <div className="h-4 w-4 bg-gray-300 rounded"></div>
-          <div className="h-4 w-40 bg-gray-200 rounded"></div>
+          <div className="h-4 w-4 bg-gray-300 rounded-sm"></div>
+          <div className="h-4 w-40 bg-gray-200 rounded-sm"></div>
         </div>
       </div>
     </div>

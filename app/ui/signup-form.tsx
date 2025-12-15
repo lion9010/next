@@ -36,7 +36,7 @@ export default function SignupForm() {
 
   return (
     <form action={action} ref={formRef}>
-      <div className="flex-1 rounded-lg bg-[var(--card)] px-6 pt-8">
+      <div className="flex-1 rounded-lg bg-(--card) px-6 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please sign up to continue.
         </h1>
@@ -46,21 +46,21 @@ export default function SignupForm() {
             onChange={setChecked}
             textLeft="Persona Natural"
             textRight="Persona Juridica"
-            iconLeft={<UserIcon className="h-[18px] w-[18px]" />}
-            iconRight={<BuildingOffice2Icon className="h-[18px] w-[18px]" />}
+            iconLeft={<UserIcon className="h-4.5 w-4.5" />}
+            iconRight={<BuildingOffice2Icon className="h-4.5 w-4.5" />}
             name="personType"
             title="Yo soy una persona:"
           />
           <div>
             <label
-              className="mb-3 mt-5 block text-xs font-medium text-[var(--foreground)]"
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
               htmlFor="name"
             >
               Name
             </label>
             <div className="relative">
               <input
-                className="peer block dark:bg-[var(--secondary-30)] w-full rounded-md border border-[var(--secondary)] py-[9px] pl-10 text-sm outline-2 placeholder:text-[var(--muted-foreground)] capitalize"
+                className="peer block bg-(--background) w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground) capitalize"
                 id="name"
                 type="text"
                 name="name"
@@ -71,7 +71,7 @@ export default function SignupForm() {
                 onInput={handleInput}
                 required
               />
-              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
+              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
             </div>
           </div>
           {state?.errors?.name && (
@@ -80,14 +80,14 @@ export default function SignupForm() {
 
           <div>
             <label
-              className="mb-3 mt-5 block text-xs font-medium text-[var(--foreground)]"
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
               htmlFor="email"
             >
               Email
             </label>
             <div className="relative">
               <input
-                className="peer dark:bg-[var(--secondary-30)] block w-full rounded-md border border-[var(--secondary)] py-[9px] pl-10 text-sm outline-2 placeholder:text-[var(--muted-foreground)] lowercase"
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground) lowercase"
                 id="email"
                 type="email"
                 name="email"
@@ -97,7 +97,7 @@ export default function SignupForm() {
                 onInput={handleInput}
                 required
               />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
+              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
             </div>
           </div>
           {state?.errors?.email && (
@@ -105,14 +105,14 @@ export default function SignupForm() {
           )}
           <div className="mt-4">
             <label
-              className="mb-3 mt-5 block text-xs font-medium text-[var(--foreground)]"
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
               htmlFor="password"
             >
               Password
             </label>
             <div className="relative">
               <input
-                className="peer dark:bg-[var(--secondary-30)] block w-full rounded-md border border-[var(--secondary)] py-[9px] pl-10 text-sm outline-2 placeholder:text-[var(--muted-foreground)]"
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground)"
                 id="password"
                 name="password"
                 placeholder="Enter password"
@@ -122,7 +122,7 @@ export default function SignupForm() {
                 onInput={handleInput}
                 required
               />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
+              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
               <PasswordVisibility visible={visible} toggleVisibility={() => setVisible(!visible)} />
             </div>
           </div>
@@ -138,14 +138,14 @@ export default function SignupForm() {
           )}
           <div className="mt-4">
             <label
-              className="mb-3 mt-5 block text-xs font-medium text-[var(--foreground)]"
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
               htmlFor="confirmPassword"
             >
               Confirm Password
             </label>
             <div className="relative">
               <input
-                className="peer dark:bg-[var(--secondary-30)] block w-full rounded-md border border-[var(--secondary)] py-[9px] pl-10 text-sm outline-2 placeholder:text-[var(--muted-foreground)]"
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground)"
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder="Confirm password"
@@ -155,7 +155,7 @@ export default function SignupForm() {
                 onInput={handleInput}
                 required
               />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[var(--muted-foreground)] peer-focus:text-[var(--primary)]" />
+              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
               <PasswordVisibility visible={visibleConfirm} toggleVisibility={() => setVisibleConfirm(!visibleConfirm)} />
             </div>
           </div>

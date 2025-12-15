@@ -8,12 +8,12 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
 
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden dark:bg-gradient-to-br from-[var(--background)] to-black">
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden dark:bg-linear-to-br from-(--background) to-black">
       <div className="w-full flex-none md:w-64">
         <SideNav />
       </div>
-      <div className="flex-grow px-6 md:overflow-y-auto md:px-12 md:py-6">
-        <div className="hidden md:flex md:justify-end md:text-[var(--ring)]">
+      <div className="grow px-6 md:overflow-y-auto md:px-12 md:py-6">
+        <div className="hidden md:flex md:justify-end md:text-(--ring)">
           <ThemeSwitch />
         </div>
         <div>{children}</div>
