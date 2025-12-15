@@ -54,7 +54,7 @@ export default async function CustomersTable({
                 ))}
               </div>
               <table className="hidden min-w-full rounded-md text-(--foreground) md:table">
-                <thead className="rounded-md bg-(--card) text-left text-sm font-normal">
+                <thead className="rounded-md text-left text-sm font-normal">
                   <tr>
                     <th scope="col" className="px-4 py-5 font-medium sm:pl-6 rounded-tl-sm">
                       Name
