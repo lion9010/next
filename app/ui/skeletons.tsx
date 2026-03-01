@@ -34,7 +34,7 @@ export function RevenueChartSkeleton() {
     <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>
       <div className="mb-4 h-8 w-36 rounded-md bg-(--card)" />
       <div className="rounded-xl bg-(--card) p-4">
-        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-(--background) p-4 md:gap-4" />
+        <div className="sm:grid-cols-13 mt-0 grid h-102.5 grid-cols-12 items-end gap-2 rounded-md bg-(--background) p-4 md:gap-4" />
         <div className="flex items-center pb-2 pt-6">
           <div className="h-5 w-5 rounded-full bg-(--card)" />
           <div className="ml-2 h-4 w-20 rounded-md bg-(--card)" />
@@ -128,8 +128,8 @@ export function TableRowSkeleton() {
       {/* Actions */}
       <td className="whitespace-nowrap py-3 pl-6 pr-3">
         <div className="flex justify-end gap-3">
-          <div className="h-[38px] w-[38px] rounded-sm bg-(--primary-30)"></div>
-          <div className="h-[38px] w-[38px] rounded-sm bg-(--primary-30)"></div>
+          <div className="h-9.5 w-9.5 rounded-sm bg-(--primary-30)"></div>
+          <div className="h-9.5 w-0.5 rounded-sm bg-(--primary-30)"></div>
         </div>
       </td>
     </tr>
@@ -226,7 +226,7 @@ export function LoginFormSkeleton() {
         <div>
           <div className="h-3 w-10 bg-gray-200 rounded-sm mb-2 mt-5"></div>
           <div className="relative">
-            <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
+            <div className="h-10.5 w-full bg-gray-200 rounded-md"></div>
 
             <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
           </div>
@@ -236,7 +236,7 @@ export function LoginFormSkeleton() {
         <div className="mt-4">
           <div className="h-3 w-16 bg-gray-200 rounded-sm mb-2 mt-5"></div>
           <div className="relative">
-            <div className="h-[42px] w-full bg-gray-200 rounded-md"></div>
+            <div className="h-10.5 w-full bg-gray-200 rounded-md"></div>
 
             {/* Ícono izquierda */}
             <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
@@ -280,7 +280,7 @@ export function SignupFormSkeleton() {
           <div className="mt-6">
             <div className="h-3 w-10 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
-              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="h-10.5 w-full rounded-md bg-gray-200"></div>
               <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
@@ -289,7 +289,7 @@ export function SignupFormSkeleton() {
           <div className="mt-6">
             <div className="h-3 w-12 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
-              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="h-10.5 w-full rounded-md bg-gray-200"></div>
               <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
             </div>
           </div>
@@ -298,7 +298,7 @@ export function SignupFormSkeleton() {
           <div className="mt-6">
             <div className="h-3 w-16 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
-              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="h-10.5 w-full rounded-md bg-gray-200"></div>
 
               {/* Icono izquierda */}
               <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>
@@ -312,7 +312,7 @@ export function SignupFormSkeleton() {
           <div className="mt-6">
             <div className="h-3 w-28 bg-gray-200 rounded-sm mb-2"></div>
             <div className="relative">
-              <div className="h-[42px] w-full rounded-md bg-gray-200"></div>
+              <div className="h-10.5 w-full rounded-md bg-gray-200"></div>
 
               {/* Icono izquierda */}
               <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 bg-gray-300 rounded-sm"></div>

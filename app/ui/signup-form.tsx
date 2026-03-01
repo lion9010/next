@@ -1,6 +1,8 @@
 "use client";
 
 import { useActionState, useState, useRef } from "react";
+import { EmailPasswordSignupData } from "@/app/lib/types/users";
+import { getSupabaseBrowserClient } from "../lib/supabase/browser";
 
 import { lusitana } from "@/app/ui/fonts";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
@@ -19,7 +21,8 @@ import { signup } from "@/app/lib/actions/users/create";
 import { SwitchToggle } from "./utils/switch-toggle";
 import { PasswordVisibility } from "./utils/password-visibility";
 
-export default function SignupForm() {
+
+export default function SignupForm({user}: EmailPasswordSignupData) {
   const [state, action, isPending] = useActionState(signup, undefined);
   const [checked, setChecked] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -32,6 +35,8 @@ export default function SignupForm() {
       setIsValid(formRef.current.checkValidity())
     }
   }
+
+  const supabase = getSupabaseBrowserClient();
 
 
   return (
@@ -185,10 +190,10 @@ export default function SignupForm() {
             </div>
           )}
 
-          {state?.errorDB && (
+          {state?.errors && (
             <div className="flex items-center gap-2 text-red-600">
               <ServerStackIcon className="h-5 w-5" />
-              <p className="text-sm">{state.errorDB}</p>
+              <p className="text-sm">{state.message}</p>
             </div>
           )}
         </div>

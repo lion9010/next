@@ -1,25 +1,19 @@
-import { withAuth } from "next-auth/middleware"
-import type { NextRequest } from "next/server"
-
-export default withAuth(
-  function proxy(req: NextRequest) {
-    // aquí podrías agregar lógica adicional si quieres
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        // solo permite acceso si hay sesión
-        return !!token
-      },
-    },
-  }
-)
-
-export const config = {
-  matcher: ["/dashboard/:path*"],
+import { type NextRequest } from "next/server"
+import { updateSession } from "@/app/lib/supabase/proxy"
+export async function proxy(request: NextRequest) {
+  return await updateSession(request)
 }
 
-// export const config = {
-//   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-//   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-// };
+export const config = {
+  matcher: [
+    "/dashboard/:path*",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    // "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+}

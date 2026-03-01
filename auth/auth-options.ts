@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import z from "zod";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import postgres from "postgres";
 
 import type { User } from '@/app/lib/types';
@@ -94,8 +94,8 @@ export const authOptions: NextAuthOptions = {
     updateAge: 60*30,
   }, // migrar a base de datos para sesiones contralas
   pages: {
-    signIn: "/login",
-    error:"/login"
+    signIn: "/auth/login",
+    error:"/auth/login"
   },
   callbacks:{
     async signIn ({ user, account, profile, email, credentials }){
