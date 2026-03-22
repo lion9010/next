@@ -3,7 +3,6 @@
 import { success, z } from 'zod';
 import { SignupFormSchema } from '@/app/lib/schemas/index';
 import { SignupFormState } from '@/app/lib/types/index';
-import bcrypt from 'bcryptjs';
 import { sql } from '@/app/lib/data';
 import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
@@ -50,25 +49,26 @@ export async function signup(state: SignupFormState, formData: FormData) {
 
     const { name, email, password } = validatedFields.data;
     const capitalizedName = capitalizeSentence(name);
-    const hashedPassword = await bcrypt.hash(password, 10);
 
-//     const supabase = await createClient()
-//     const { data, error } = await supabase.auth.signUp({
-//     email,
-//     password,
-//     options: {
-//       // Importante: URL a donde volverá el usuario tras confirmar el email
-//       emailRedirectTo: 'http://localhost:3000',
-//     },
-//   })
+    const supabase = await createClient()
+    const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      // Importante: URL a donde volverá el usuario tras confirmar el email, el siguiente no funciona porque está en localhost, pero en producción debería ser la URL de tu app
+      emailRedirectTo: 'http://localhost:3000/dashboard',
+    },
+  })
 
-//   if (error) {
-//     console.error('Error al registrarse:', error.message)
-//     return
-//   }
+  if (error) {
+    console.error('Error al registrarse:', error.message)
+    return
+  }
+
+  // está funcionando hasta acá, debo crear la redirección y la página de "ve a tu correo y confirma tu cuenta"
   
 //   return data
-    console.log("estoy aca");
+
 
 
     // async function signUpNewUser() {

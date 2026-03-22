@@ -11,12 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { authenticate } from "@/app/lib/auth";
-import { signIn } from "next-auth/react";
 
 import { Button } from "@/app/ui/button";
 import { PasswordVisibility } from "./utils/password-visibility";
+import { createClient } from "../lib/supabase/client";
 
 export default function LoginForm() {
+  const supabase = createClient();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
   const [errorMessage, formAction, isPending] = useActionState(
@@ -36,27 +37,45 @@ export default function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
 
-    const res = await signIn("db-interna", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      redirect: false,
-      callbackUrl: "/dashboard",
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
 
     setLoading(false);
 
-    if (res?.error) {
+    if (error) {
       setError("Credenciales inválidas");
-    } else {
-      window.location.href = "/dashboard";
+      return;
     }
+
+    // Redirección
+    window.location.href = callbackUrl;
+
+    // const res = await signIn("db-interna", {
+    //   email: formData.get("email"),
+    //   password: formData.get("password"),
+    //   redirect: false,
+    //   callbackUrl: "/dashboard",
+    // });
+
+    // setLoading(false);
+
+    // if (res?.error) {
+    //   setError("Credenciales inválidas");
+    // } else {
+    //   window.location.href = "/dashboard";
+    // }
   }
 
   return (

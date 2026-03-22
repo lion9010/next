@@ -1,14 +1,14 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import Signup from '@/app/ui/signup-form';
 import { Suspense } from 'react';
-import { getSupabaseClient } from '@/app/lib/supabase/client';
+// import { getSupabaseClient } from '@/app/lib/supabase/client';
  
 export default async function SignupPage() {
-  const supabase = await getSupabaseClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  console.log("Pagina de registro - Usuario actual: ", user);
+  // const supabase = await getSupabaseClient();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
+  // console.log("Pagina de registro - Usuario actual: ", user);
 
 
   return (
