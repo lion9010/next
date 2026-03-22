@@ -1,10 +1,8 @@
 import SideNav from "@/app/ui/dashboard/sidenav";
 import { ThemeSwitch } from "../ui/utils/theme-switch";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/auth/auth-options";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions)
+  
 
 
   return (
