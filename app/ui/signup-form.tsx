@@ -20,6 +20,7 @@ import { signup } from "@/app/lib/actions/users/create";
 
 import { SwitchToggle } from "./utils/switch-toggle";
 import { PasswordVisibility } from "./utils/password-visibility";
+import Link from "next/link";
 
 
 export default function SignupForm({user}: EmailPasswordSignupData) {
@@ -198,6 +199,12 @@ export default function SignupForm({user}: EmailPasswordSignupData) {
           )}
         </div>
       </div>
+      <Link
+        href="/auth/login"
+        className="text-sm text-blue-500 hover:underline text-center block mt-4"
+      >
+        ¿Yo tienes una cuenta? Inicia sesión.
+      </Link>
     </form>
   );
 }

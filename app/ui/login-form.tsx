@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { lusitana } from "@/app/ui/fonts";
@@ -8,22 +8,20 @@ import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
+  ArrowPathIcon
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
-import { authenticate } from "@/app/lib/auth";
 
 import { Button } from "@/app/ui/button";
 import { PasswordVisibility } from "./utils/password-visibility";
 import { createClient } from "../lib/supabase/client";
+import Link from "next/link";
 
 export default function LoginForm() {
   const supabase = createClient();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined
-  );
+  
   const [visible, setVisible] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
@@ -55,27 +53,38 @@ export default function LoginForm() {
     setLoading(false);
 
     if (error) {
-      setError("Credenciales inválidas");
-      return;
+    // Usamos el status code o mensajes clave para decidir qué mostrar
+    switch (true) {
+        // Caso 1: Error de red o conexión
+        case (error.message.includes("fetch")):
+            setError("No hay conexión con el servidor. Revisa tu internet.");
+            break;
+
+        // Caso 2: El usuario no ha confirmado el correo (Error común en Supabase)
+        case (error.message.includes("Email not confirmed")):
+            setError("Por favor, verifica tu correo electrónico antes de entrar.");
+            break;
+
+        // Caso 3: Error de servidor (500)
+        case (error.status && error.status >= 500):
+            setError("Nuestra base de datos está en mantenimiento. Intenta más tarde.");
+            break;
+
+        // Caso 4: Credenciales inválidas (400, 401)
+        case (error.status === 400 || error.status === 401):
+            setError("El correo o la contraseña son incorrectos.");
+            break;
+
+        // Caso por defecto: Cualquier otro error desconocido
+        default:
+            setError("Ocurrió un error inesperado. Código: " + error.status);
     }
+    return;
+}
 
     // Redirección
     window.location.href = callbackUrl;
 
-    // const res = await signIn("db-interna", {
-    //   email: formData.get("email"),
-    //   password: formData.get("password"),
-    //   redirect: false,
-    //   callbackUrl: "/dashboard",
-    // });
-
-    // setLoading(false);
-
-    // if (res?.error) {
-    //   setError("Credenciales inválidas");
-    // } else {
-    //   window.location.href = "/dashboard";
-    // }
   }
 
   return (
@@ -134,24 +143,34 @@ export default function LoginForm() {
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button
-          className={`mt-6 w-full ${isValid ? "text-white" : ""}`}
-          disabled={isPending || isValid}
+          className={`mt-6 w-full ${isValid || loading ? "text-white" : ""}`}
+          disabled={isValid || loading}
         >
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5" />
+          Log in
+          {loading? 
+            <ArrowPathIcon className="ml-auto h-5 w-5 animate-spin" /> 
+            : <ArrowRightIcon className="ml-auto h-5 w-5" />} 
+          
         </Button>
         <div
-          className="flex h-8 items-end space-x-1"
+          className="flex min-h-8 items-start space-x-2 mt-2"
           aria-live="polite"
           aria-atomic="true"
         >
-          {errorMessage && (
+          {error && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <ExclamationCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
+              <p className="text-sm text-red-500">{error}</p>
             </>
           )}
         </div>
       </div>
+      <Link
+        href="/auth/signup"
+        className="text-sm text-blue-500 hover:underline text-center block mt-4"
+      >
+        ¿No tienes una cuenta? Registrate
+      </Link>
     </form>
   );
 }
