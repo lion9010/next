@@ -7,10 +7,8 @@ import { sql } from '@/app/lib/data';
 import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
 import { capitalizeSentence } from '../../utils';
-import { auth } from '@/auth/auth';
 import { redirect } from 'next/navigation';
 import AuthError from 'next-auth';
-import NextAuth from '@/auth/auth-options';
 import signIn from 'next-auth'
 import { createAdminClient } from '../../supabase/admin';
 import { createClient } from '../../supabase/server';
