@@ -8,8 +8,6 @@ import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
 import { capitalizeSentence } from '../../utils';
 import { redirect } from 'next/navigation';
-import AuthError from 'next-auth';
-import signIn from 'next-auth'
 import { createAdminClient } from '../../supabase/admin';
 import { createClient } from '../../supabase/server';
 
