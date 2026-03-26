@@ -13,6 +13,7 @@ import {
   UserIcon,
   ServerStackIcon,
   BuildingOffice2Icon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
 import { Button } from "@/app/ui/button";
@@ -22,8 +23,7 @@ import { SwitchToggle } from "./utils/switch-toggle";
 import { PasswordVisibility } from "./utils/password-visibility";
 import Link from "next/link";
 
-
-export default function SignupForm({user}: EmailPasswordSignupData) {
+export default function SignupForm({ user }: EmailPasswordSignupData) {
   const [state, action, isPending] = useActionState(signup, undefined);
   const [checked, setChecked] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -33,16 +33,15 @@ export default function SignupForm({user}: EmailPasswordSignupData) {
 
   const handleInput = () => {
     if (formRef.current) {
-      setIsValid(formRef.current.checkValidity())
+      setIsValid(formRef.current.checkValidity());
     }
-  }
+  };
 
   const supabase = getSupabaseBrowserClient();
 
-
   return (
     <form action={action} ref={formRef}>
-      <div className="flex-1 rounded-lg bg-(--card) px-6 pt-8">
+      <div className="flex-1 rounded-lg bg-(--card) px-6 pt-8 pb-1">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please sign up to continue.
         </h1>
@@ -129,7 +128,10 @@ export default function SignupForm({user}: EmailPasswordSignupData) {
                 required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
-              <PasswordVisibility visible={visible} toggleVisibility={() => setVisible(!visible)} />
+              <PasswordVisibility
+                visible={visible}
+                toggleVisibility={() => setVisible(!visible)}
+              />
             </div>
           </div>
           {state?.errors?.password && (
@@ -162,7 +164,10 @@ export default function SignupForm({user}: EmailPasswordSignupData) {
                 required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
-              <PasswordVisibility visible={visibleConfirm} toggleVisibility={() => setVisibleConfirm(!visibleConfirm)} />
+              <PasswordVisibility
+                visible={visibleConfirm}
+                toggleVisibility={() => setVisibleConfirm(!visibleConfirm)}
+              />
             </div>
           </div>
           {state?.errors?.confirmPassword && (
@@ -172,20 +177,29 @@ export default function SignupForm({user}: EmailPasswordSignupData) {
           )}
         </div>
         <input type="hidden" name="redirectTo" />
-        <Button 
+        <Button
           disabled={isPending || isValid}
-          className={`mt-6 w-full ${isValid? "text-white":""}`} 
+          className={`mt-6 w-full ${isValid ? "text-white" : ""}`}
         >
-          {isPending ? "Enviando..." : "Enviar"}
-          <ArrowRightIcon className="ml-auto h-5 w-5" />
+          {isPending ? (
+            <>
+              Enviando...
+              <ArrowPathIcon className="ml-auto h-5 w-5 animate-spin" />
+            </>
+          ) : (
+            <>
+              Enviar
+              <ArrowRightIcon className="ml-auto h-5 w-5" />
+            </>
+          )}
         </Button>
         <div
-          className="mt-4 flex h-8 items-end space-x-1"
+          className="my-4 flex-col items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
           {state?.message && (
-            <div className="flex items-center gap-2 text-red-600">
+            <div className="flex items-center gap-2 text-red-600 mb-2">
               <ExclamationCircleIcon className="h-5 w-5" />
               <p className="text-sm">{state.message}</p>
             </div>
