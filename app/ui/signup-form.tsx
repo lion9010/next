@@ -30,7 +30,7 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
   const [visibleConfirm, setVisibleConfirm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
-  const [showPopover, setShowPopover] = useState(true);
+  const [showPopover, setShowPopover] = useState(false);
 
   const handleInput = () => {
     if (formRef.current) {
