@@ -60,8 +60,8 @@
     --card-values: 50.595% -0.06321 -0.08248;
     --card: oklab(var(--card-values)/0.05);
     --card-foreground: oklch(0.141 0.005 285.823);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(14.077% 0.0044 285.776);
+    --popover: oklab(var(--card-values)/0.5);
+    --popover-foreground: var(--background);
     --primary-values: 33.952% -0.02406 -0.12545;
     --primary: oklab(var(--primary-values));
     --primary-30: oklab(var(--primary-values)/0.3);
@@ -104,7 +104,7 @@
     --card-values: 33.952% -0.02406 -0.12545;
     --card: oklab(var(--card-values)/0.1);
     --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.21 0.006 285.885);
+    --popover: oklab(var(--card-values)/0.5);
     --popover-foreground: oklch(0.985 0 0);
     --primary-values: 73.643% 0.10747 0.14928;
     --primary: oklab(var(--primary-values));

@@ -48,22 +48,29 @@ export async function signup(state: SignupFormState, formData: FormData) {
 
     const supabase = await createClient()
     const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      // Importante: URL a donde volverá el usuario tras confirmar el email, el siguiente no funciona porque está en localhost, pero en producción debería ser la URL de tu app
-      emailRedirectTo: 'http://localhost:3000/dashboard',
-    },
-  })
+        email,
+        password,
+        options: {
+            // Importante: URL a donde volverá el usuario tras confirmar el email, el siguiente no funciona porque está en localhost, pero en producción debería ser la URL de tu app
+            emailRedirectTo: 'http://localhost:3000/dashboard',
+        },
+    })
 
-  if (error) {
-    console.error('Error al registrarse:', error.message)
-    return
-  }
+    if (error) {
+        return { error: error.message };
+    }
 
-  // está funcionando hasta acá, debo crear la redirección y la página de "ve a tu correo y confirma tu cuenta"
-  
-//   return data
+    if (!data?.user) {
+        return {
+            error: "Revisa tu correo o intenta iniciar sesión.",
+        };
+    }
+
+    return { success: true, email };
+
+    // está funcionando hasta acá, debo crear la redirección y la página de "ve a tu correo y confirma tu cuenta"
+
+    //   return data
 
 
 

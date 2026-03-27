@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useState, useRef } from "react";
+import { useActionState, useState, useRef, useEffect } from "react";
 import { EmailPasswordSignupData } from "@/app/lib/types/users";
-import { getSupabaseBrowserClient } from "../lib/supabase/browser";
 
 import { lusitana } from "@/app/ui/fonts";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
@@ -21,6 +20,7 @@ import { signup } from "@/app/lib/actions/users/create";
 
 import { SwitchToggle } from "./utils/switch-toggle";
 import { PasswordVisibility } from "./utils/password-visibility";
+import SuccessPopover from "./utils/popover";
 import Link from "next/link";
 
 export default function SignupForm({ user }: EmailPasswordSignupData) {
@@ -30,6 +30,7 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
   const [visibleConfirm, setVisibleConfirm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
+  const [showPopover, setShowPopover] = useState(true);
 
   const handleInput = () => {
     if (formRef.current) {
@@ -37,7 +38,11 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
     }
   };
 
-  const supabase = getSupabaseBrowserClient();
+  useEffect(() => {
+    if (state?.success) {
+      setShowPopover(true);
+    }
+  }, [state]);
 
   return (
     <form action={action} ref={formRef}>
@@ -219,6 +224,12 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
       >
         ¿Yo tienes una cuenta? Inicia sesión.
       </Link>
+      <SuccessPopover
+        open={showPopover}
+        email={state?.email}
+        timeoutAuto={false}
+        onClose={() => setShowPopover(false)}
+      />
     </form>
   );
 }

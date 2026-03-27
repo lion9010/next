@@ -1,13 +1,14 @@
 import { User as SupabaseUser } from "@supabase/supabase-js";
 
 export type EmailPasswordSignupData = {
-    user : SupabaseUser | null;
+    user: SupabaseUser | null;
 };
 
 export type SignupFormState =
-| { success?: boolean
-    // id?: string
-}
+    | {
+        success?: boolean
+        // id?: string
+    }
     | {
         errors?: {
             name?: string[]
@@ -20,9 +21,9 @@ export type SignupFormState =
     | undefined;
 
 export type User = {
-  id: string;
-  type: "natural" | "juridical";
-  name: string;
-  email: string;
-  password: string;
+    id: string;
+    type: "natural" | "juridical";
+    name: string;
+    email: string;
+    password: string;
 };
