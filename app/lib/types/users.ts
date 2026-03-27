@@ -5,20 +5,21 @@ export type EmailPasswordSignupData = {
 };
 
 export type SignupFormState =
-    | {
-        success?: boolean
-        // id?: string
-    }
-    | {
-        errors?: {
-            name?: string[]
-            email?: string[]
-            password?: string[]
-            confirmPassword?: string[]
-        }
-        message?: string
-    }
-    | undefined;
+    {
+        status: "idle" | "error" | "success";
+        message?: string;
+        email?: string;
+
+        fieldErrors?: {
+            name?: string[];
+            email?: string[];
+            password?: string[];
+            confirmPassword?: string[];
+        };
+
+        formErrors?: Record<string, string | null>;
+        serverErrors?: string;
+    };
 
 export type User = {
     id: string;

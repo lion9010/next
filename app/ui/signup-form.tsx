@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, useRef, useEffect } from "react";
-import { EmailPasswordSignupData } from "@/app/lib/types/users";
+import { EmailPasswordSignupData, SignupFormState } from "@/app/lib/types/users";
 
 import { lusitana } from "@/app/ui/fonts";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
@@ -24,7 +24,7 @@ import SuccessPopover from "./utils/popover";
 import Link from "next/link";
 
 export default function SignupForm({ user }: EmailPasswordSignupData) {
-  const [state, action, isPending] = useActionState(signup, undefined);
+  const [state, action, isPending] = useActionState<SignupFormState, FormData>(signup, {status:"idle"});
   const [checked, setChecked] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
@@ -39,7 +39,7 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
   };
 
   useEffect(() => {
-    if (state?.success) {
+    if (state?.status === "success") {
       setShowPopover(true);
     }
   }, [state]);
@@ -84,8 +84,8 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
             </div>
           </div>
-          {state?.errors?.name && (
-            <p className="text-sm text-red-500">{state.errors.name}</p>
+          {state?.formErrors && (
+            <p className="text-sm text-red-500">{state.fieldErrors?.name}</p>
           )}
 
           <div>
@@ -110,8 +110,8 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
             </div>
           </div>
-          {state?.errors?.email && (
-            <p className="text-sm text-red-500">{state.errors.email}</p>
+          {state?.fieldErrors?.email && (
+            <p className="text-sm text-red-500">{state.fieldErrors.email}</p>
           )}
           <div className="mt-4">
             <label
@@ -139,11 +139,11 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
               />
             </div>
           </div>
-          {state?.errors?.password && (
+          {state?.fieldErrors?.password && (
             <div className="text-sm text-red-500">
               <p>Password must:</p>
               <ul>
-                {state.errors.password.map((error) => (
+                {state.fieldErrors.password.map((error) => (
                   <li key={error}>- {error}</li>
                 ))}
               </ul>
@@ -175,9 +175,9 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
               />
             </div>
           </div>
-          {state?.errors?.confirmPassword && (
+          {state?.fieldErrors?.confirmPassword && (
             <p className="text-sm text-red-500">
-              {state.errors.confirmPassword}
+              {state.fieldErrors.confirmPassword}
             </p>
           )}
         </div>
@@ -209,11 +209,10 @@ export default function SignupForm({ user }: EmailPasswordSignupData) {
               <p className="text-sm">{state.message}</p>
             </div>
           )}
-
-          {state?.errors && (
+          {state?.serverErrors && (
             <div className="flex items-center gap-2 text-red-600">
               <ServerStackIcon className="h-5 w-5" />
-              <p className="text-sm">{state.message}</p>
+              <p className="text-sm">{state.serverErrors}</p>
             </div>
           )}
         </div>

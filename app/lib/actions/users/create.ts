@@ -1,6 +1,6 @@
 'use server';
 
-import { success, z } from 'zod';
+import { formatError, success, z } from 'zod';
 import { SignupFormSchema } from '@/app/lib/schemas/index';
 import { SignupFormState } from '@/app/lib/types/index';
 import { sql } from '@/app/lib/data';
@@ -13,7 +13,7 @@ import { createClient } from '../../supabase/server';
 
 
 
-export async function signup(state: SignupFormState, formData: FormData) {
+export async function signup(state: SignupFormState, formData: FormData): Promise<SignupFormState> {
 
     const validatedFields = SignupFormSchema.safeParse({
         personType: formData.get('personType'),
@@ -37,9 +37,10 @@ export async function signup(state: SignupFormState, formData: FormData) {
 
 
         return {
-            errors: fieldErrors,
+            status: "error",
+            message: 'Por favor arregla los errores del formulario',
+            fieldErrors: fieldErrors,
             formErrors: formDataObj,
-            message: 'Please fix the errors in the form.',
         }
     }
 
@@ -57,16 +58,23 @@ export async function signup(state: SignupFormState, formData: FormData) {
     })
 
     if (error) {
-        return { error: error.message };
+        return {
+            status: "error",
+            serverErrors: error.message
+        };
     }
 
     if (!data?.user) {
         return {
-            error: "Revisa tu correo o intenta iniciar sesión.",
+            status: "error",
+            message: "Revisa tu correo o intenta iniciar sesión.",
         };
     }
 
-    return { success: true, email };
+    return {
+        status: "success",
+        email
+    };
 
     // está funcionando hasta acá, debo crear la redirección y la página de "ve a tu correo y confirma tu cuenta"
 

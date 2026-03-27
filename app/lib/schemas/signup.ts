@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const SignupFormSchema = z.object({
     name: z
         .string()
-        .min(2, 'Muy corto')
+        .min(3, 'Muy corto')
         .max(100, 'Muy largo')
         .trim(),
     email: z
