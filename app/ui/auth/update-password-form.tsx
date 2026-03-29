@@ -154,7 +154,7 @@ export default function UpdatePasswordForm() {
         href="/auth/login"
         className="text-sm text-blue-500 hover:underline text-center block mt-4"
       >
-        ¿Yo tienes una cuenta? Inicia sesión.
+        ¿Ya tienes una cuenta? Inicia sesión.
       </Link>
       <SuccessPopover
         open={showPopover}
