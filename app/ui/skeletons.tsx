@@ -335,3 +335,42 @@ export function SignupFormSkeleton() {
     </div>
   );
 }
+
+export function ForgotPasswordSkeleton() {
+  return (
+    <div className="flex-1 rounded-lg bg-(--card) px-6 pt-8 pb-1 animate-pulse">
+      
+      {/* TITLE */}
+      <div className="h-6 w-2/3 bg-(--muted) rounded mb-6" />
+
+      <div className="w-full">
+        
+        {/* LABEL */}
+        <div className="h-3 w-16 bg-(--muted) rounded mb-3 mt-5" />
+
+        {/* INPUT */}
+        <div className="relative">
+          <div className="h-10 w-full bg-(--background) border border-(--border) rounded-md" />
+
+          {/* ICON */}
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4.5 w-4.5 bg-(--muted) rounded-full" />
+        </div>
+
+        {/* ERROR (fake space to avoid layout shift) */}
+        <div className="h-4 w-1/2 bg-(--muted) rounded mt-2" />
+      </div>
+
+      {/* BUTTON */}
+      <div className="mt-6 h-10 w-full bg-(--muted) rounded-md" />
+
+      {/* MESSAGES */}
+      <div className="my-4 space-y-2">
+        <div className="h-4 w-3/4 bg-(--muted) rounded" />
+        <div className="h-4 w-2/3 bg-(--muted) rounded" />
+      </div>
+
+      {/* LINK */}
+      <div className="h-4 w-1/2 bg-(--muted) rounded mx-auto mt-4" />
+    </div>
+  );
+}

@@ -4,22 +4,38 @@ export type EmailPasswordSignupData = {
     user: SupabaseUser | null;
 };
 
-export type SignupFormState =
-    {
-        status: "idle" | "error" | "success";
-        message?: string;
-        email?: string;
+type BaseFormState = {
+    status: "idle" | "error" | "success";
+    message?: string;
+    serverErrors?: string;
+    formErrors?: Record<string, string | null>;
+};
 
-        fieldErrors?: {
-            name?: string[];
-            email?: string[];
-            password?: string[];
-            confirmPassword?: string[];
-        };
+export type SignupFormState = BaseFormState & {
+    email?: string;
 
-        formErrors?: Record<string, string | null>;
-        serverErrors?: string;
+    fieldErrors?: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
+        confirmPassword?: string[];
     };
+};
+
+export type ForgotPasswordFormState = BaseFormState & {
+    email?: string;
+
+    fieldErrors?: {
+        email?: string[];
+    };
+};
+
+export type UpdatePasswordFormState = BaseFormState & {
+    fieldErrors?: {
+        newPassword?: string[];
+        confirmPassword?: string[];
+    };
+};
 
 export type User = {
     id: string;

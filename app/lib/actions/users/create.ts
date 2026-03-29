@@ -8,7 +8,6 @@ import { parsePgError } from '@/app/lib/actions/errors';
 import { PostgresError } from 'postgres';
 import { capitalizeSentence } from '../../utils';
 import { redirect } from 'next/navigation';
-import { createAdminClient } from '../../supabase/admin';
 import { createClient } from '../../supabase/server';
 
 
@@ -52,7 +51,7 @@ export async function signup(state: SignupFormState, formData: FormData): Promis
         email,
         password,
         options: {
-            // Importante: URL a donde volverá el usuario tras confirmar el email, el siguiente no funciona porque está en localhost, pero en producción debería ser la URL de tu app
+            //crear página welcome
             emailRedirectTo: 'http://localhost:3000/dashboard',
         },
     })
@@ -67,7 +66,7 @@ export async function signup(state: SignupFormState, formData: FormData): Promis
     if (!data?.user) {
         return {
             status: "error",
-            message: "Revisa tu correo o intenta iniciar sesión.",
+            serverErrors: "Revisa tu correo o intenta iniciar sesión.",
         };
     }
 

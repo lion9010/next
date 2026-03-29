@@ -1,3 +1,3 @@
 export * from './invoice';
-export * from './signup';
+export * from './auth';
 export * from './customer';

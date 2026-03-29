@@ -8,20 +8,21 @@ import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
-  ArrowPathIcon
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
+import { EmailPasswordSignupData } from "@/app/lib/types";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 
 import { Button } from "@/app/ui/button";
-import { PasswordVisibility } from "./utils/password-visibility";
-import { createClient } from "../lib/supabase/client";
+import { PasswordVisibility } from "../utils/password-visibility";
+import { createClient } from "../../lib/supabase/client";
 import Link from "next/link";
 
-export default function LoginForm() {
+export default function LoginForm({ user }: EmailPasswordSignupData) {
   const supabase = createClient();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
-  
+
   const [visible, setVisible] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
@@ -53,38 +54,41 @@ export default function LoginForm() {
     setLoading(false);
 
     if (error) {
-    // Usamos el status code o mensajes clave para decidir qué mostrar
-    switch (true) {
+      // Usamos el status code o mensajes clave para decidir qué mostrar
+      switch (true) {
         // Caso 1: Error de red o conexión
-        case (error.message.includes("fetch")):
-            setError("No hay conexión con el servidor. Revisa tu internet.");
-            break;
+        case error.message.includes("fetch"):
+          setError("No hay conexión con el servidor. Revisa tu internet.");
+          break;
 
         // Caso 2: El usuario no ha confirmado el correo (Error común en Supabase)
-        case (error.message.includes("Email not confirmed")):
-            setError("Por favor, verifica tu correo electrónico antes de entrar.");
-            break;
+        case error.message.includes("Email not confirmed"):
+          setError(
+            "Por favor, verifica tu correo electrónico antes de entrar.",
+          );
+          break;
 
         // Caso 3: Error de servidor (500)
-        case (error.status && error.status >= 500):
-            setError("Nuestra base de datos está en mantenimiento. Intenta más tarde.");
-            break;
+        case error.status && error.status >= 500:
+          setError(
+            "Nuestra base de datos está en mantenimiento. Intenta más tarde.",
+          );
+          break;
 
         // Caso 4: Credenciales inválidas (400, 401)
-        case (error.status === 400 || error.status === 401):
-            setError("El correo o la contraseña son incorrectos.");
-            break;
+        case error.status === 400 || error.status === 401:
+          setError("El correo o la contraseña son incorrectos.");
+          break;
 
         // Caso por defecto: Cualquier otro error desconocido
         default:
-            setError("Ocurrió un error inesperado. Código: " + error.status);
+          setError("Ocurrió un error inesperado. Código: " + error.status);
+      }
+      return;
     }
-    return;
-}
 
     // Redirección
     window.location.href = callbackUrl;
-
   }
 
   return (
@@ -140,6 +144,12 @@ export default function LoginForm() {
               />
             </div>
           </div>
+          <Link
+            href="/auth/forgot-password"
+            className="text-xs text-(--muted-foreground) hover:underline hover:text-(--accent) text-right block mt-1"
+          >
+            ¿Olvidaste tu contraseña? Cambiala
+          </Link>
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button
@@ -147,10 +157,11 @@ export default function LoginForm() {
           disabled={isValid || loading}
         >
           Log in
-          {loading? 
-            <ArrowPathIcon className="ml-auto h-5 w-5 animate-spin" /> 
-            : <ArrowRightIcon className="ml-auto h-5 w-5" />} 
-          
+          {loading ? (
+            <ArrowPathIcon className="ml-auto h-5 w-5 animate-spin" />
+          ) : (
+            <ArrowRightIcon className="ml-auto h-5 w-5" />
+          )}
         </Button>
         <div
           className="flex min-h-8 items-start space-x-2 mt-2"

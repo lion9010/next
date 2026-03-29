@@ -1,0 +1,234 @@
+"use client";
+
+import { useActionState, useState, useRef, useEffect } from "react";
+import { EmailPasswordSignupData, SignupFormState } from "@/app/lib/types/users";
+
+import { lusitana } from "@/app/ui/fonts";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import {
+  AtSymbolIcon,
+  KeyIcon,
+  ExclamationCircleIcon,
+  UserIcon,
+  ServerStackIcon,
+  BuildingOffice2Icon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
+
+import { Button } from "@/app/ui/button";
+import { signup } from "@/app/lib/actions/users/create";
+
+import { SwitchToggle } from "../utils/switch-toggle";
+import { PasswordVisibility } from "../utils/password-visibility";
+import SuccessPopover from "../utils/popover";
+import Link from "next/link";
+
+export default function SignupForm({ user }: EmailPasswordSignupData) {
+  const [state, action, isPending] = useActionState<SignupFormState, FormData>(signup, {status:"idle"});
+  const [checked, setChecked] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isValid, setIsValid] = useState(false);
+  const [showPopover, setShowPopover] = useState(false);
+
+  const handleInput = () => {
+    if (formRef.current) {
+      setIsValid(formRef.current.checkValidity());
+    }
+  };
+
+  useEffect(() => {
+    if (state?.status === "success") {
+      setShowPopover(true);
+    }
+  }, [state]);
+
+  return (
+    <form action={action} ref={formRef}>
+      <div className="flex-1 rounded-lg bg-(--card) px-6 pt-8 pb-1">
+        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
+          Please sign up to continue.
+        </h1>
+        <div className="w-full">
+          <SwitchToggle
+            checkedInitial={checked}
+            onChange={setChecked}
+            textLeft="Persona Natural"
+            textRight="Persona Juridica"
+            iconLeft={<UserIcon className="h-4.5 w-4.5" />}
+            iconRight={<BuildingOffice2Icon className="h-4.5 w-4.5" />}
+            name="personType"
+            title="Yo soy una persona:"
+          />
+          <div>
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
+              htmlFor="name"
+            >
+              Name
+            </label>
+            <div className="relative">
+              <input
+                className="peer block bg-(--background) w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground) capitalize"
+                id="name"
+                type="text"
+                name="name"
+                autoCapitalize="words"
+                placeholder="Enter your name"
+                autoComplete="given-name"
+                defaultValue={state?.formErrors?.name || ""}
+                onInput={handleInput}
+                required
+              />
+              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
+            </div>
+          </div>
+          {state?.formErrors && (
+            <p className="text-sm text-red-500">{state.fieldErrors?.name}</p>
+          )}
+
+          <div>
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div className="relative">
+              <input
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground) lowercase"
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter your email address"
+                autoComplete="email"
+                defaultValue={state?.formErrors?.email || ""}
+                onInput={handleInput}
+                required
+              />
+              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
+            </div>
+          </div>
+          {state?.fieldErrors?.email && (
+            <p className="text-sm text-red-500">{state.fieldErrors.email}</p>
+          )}
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div className="relative">
+              <input
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground)"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                minLength={6}
+                defaultValue={state?.formErrors?.password || ""}
+                type={visible ? "text" : "password"}
+                onInput={handleInput}
+                required
+              />
+              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
+              <PasswordVisibility
+                visible={visible}
+                toggleVisibility={() => setVisible(!visible)}
+              />
+            </div>
+          </div>
+          {state?.fieldErrors?.password && (
+            <div className="text-sm text-red-500">
+              <p>Password must:</p>
+              <ul>
+                {state.fieldErrors.password.map((error) => (
+                  <li key={error}>- {error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="mt-4">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-(--foreground)"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                className="peer bg-(--background) block w-full rounded-md border border-(--border) py-2.25 pl-10 text-sm placeholder:text-(--muted-foreground)"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                minLength={6}
+                type={visibleConfirm ? "text" : "password"}
+                defaultValue={state?.formErrors?.confirmPassword || ""}
+                onInput={handleInput}
+                required
+              />
+              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-(--muted-foreground) peer-focus:text-(--primary)" />
+              <PasswordVisibility
+                visible={visibleConfirm}
+                toggleVisibility={() => setVisibleConfirm(!visibleConfirm)}
+              />
+            </div>
+          </div>
+          {state?.fieldErrors?.confirmPassword && (
+            <p className="text-sm text-red-500">
+              {state.fieldErrors.confirmPassword}
+            </p>
+          )}
+        </div>
+        <input type="hidden" name="redirectTo" />
+        <Button
+          disabled={isPending || isValid}
+          className={`mt-6 w-full ${isValid ? "text-white" : ""}`}
+        >
+          {isPending ? (
+            <>
+              Enviando...
+              <ArrowPathIcon className="ml-auto h-5 w-5 animate-spin" />
+            </>
+          ) : (
+            <>
+              Enviar
+              <ArrowRightIcon className="ml-auto h-5 w-5" />
+            </>
+          )}
+        </Button>
+        <div
+          className="my-4 flex-col items-end space-x-1"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {state?.message && (
+            <div className="flex items-center gap-2 text-red-600 mb-2">
+              <ExclamationCircleIcon className="h-5 w-5" />
+              <p className="text-sm">{state.message}</p>
+            </div>
+          )}
+          {state?.serverErrors && (
+            <div className="flex items-center gap-2 text-red-600">
+              <ServerStackIcon className="h-5 w-5" />
+              <p className="text-sm">{state.serverErrors}</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <Link
+        href="/auth/login"
+        className="text-sm text-blue-500 hover:underline text-center block mt-4"
+      >
+        ¿Yo tienes una cuenta? Inicia sesión.
+      </Link>
+      <SuccessPopover
+        open={showPopover}
+        email={state?.email}
+        timeoutAuto={false}
+        onClose={() => setShowPopover(false)}
+      />
+    </form>
+  );
+}
