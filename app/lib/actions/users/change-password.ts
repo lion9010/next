@@ -26,7 +26,7 @@ export async function changePassword(state: ForgotPasswordFormState, formData: F
     const email = validatedFields.data;
     const supabase = await createClient();
     supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:3000/auth/update-password'
+        redirectTo: 'https://next-kappa-six-43.vercel.app/auth/update-password'
     })
 
     return {
