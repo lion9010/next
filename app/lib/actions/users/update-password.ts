@@ -3,7 +3,7 @@
 import z from "zod";
 import { UpdatePasswordSchema } from "../../schemas";
 import { UpdatePasswordFormState } from "../../types";
-import { getSupabaseBrowserClient } from "../../supabase/browser";
+import { createClient } from "../../supabase/server";
 
 export async function updatePassword(state: UpdatePasswordFormState, formData: FormData): Promise<UpdatePasswordFormState> {
     const validatedFields = UpdatePasswordSchema.safeParse({
@@ -30,8 +30,8 @@ export async function updatePassword(state: UpdatePasswordFormState, formData: F
     }
 
     const newPassword = validatedFields.data.password;
-    const supabase = getSupabaseBrowserClient();
-    await supabase.auth.updateUser({password: newPassword})
+    const supabase = await createClient();
+    supabase.auth.updateUser({password: newPassword})
 
     return { status: "success" }
 }
