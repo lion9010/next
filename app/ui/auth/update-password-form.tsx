@@ -15,6 +15,7 @@ import { lusitana } from "../fonts";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { UpdatePasswordFormState } from "@/app/lib/types";
 import { updatePassword } from "@/app/lib/actions/users/update-password";
+import { createClient } from "@/app/lib/supabase/client";
 
 export default function UpdatePasswordForm() {
   const [state, action, isPending] = useActionState<
@@ -26,6 +27,14 @@ export default function UpdatePasswordForm() {
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
+
+  useEffect(()=>{
+    const supabase = createClient()
+    supabase.auth.getSession(),
+    []
+  }
+
+  )
 
   const handleInput = () => {
     if (formRef.current) {
