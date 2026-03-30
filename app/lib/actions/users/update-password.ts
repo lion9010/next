@@ -10,7 +10,7 @@ export async function updatePassword(state: UpdatePasswordFormState, formData: F
         password: formData.get('newPassword'),
         confirmPassword: formData.get('confirmPassword'),
     })
-    if (!validatedFields.success){
+    if (!validatedFields.success) {
         const tree = z.treeifyError(validatedFields.error)
         const fieldErrors = {
             newPassword: tree.properties?.password?.errors,
@@ -31,8 +31,16 @@ export async function updatePassword(state: UpdatePasswordFormState, formData: F
 
     const newPassword = validatedFields.data.password;
     const supabase = await createClient();
-    await supabase.auth.getSession()
-    supabase.auth.updateUser({password: newPassword})
+    const { data, error: sessionError } = await supabase.auth.getSession()
+
+    if (!data || sessionError) {
+        return {
+            status: "error",
+            message: "Sesión inválida o expirada",
+        }
+    }
+
+    supabase.auth.updateUser({ password: newPassword })
 
     return { status: "success" }
 }
