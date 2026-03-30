@@ -30,11 +30,8 @@ export default function UpdatePasswordForm() {
 
   useEffect(()=>{
     const supabase = createClient()
-    supabase.auth.getSession(),
-    []
-  }
-
-  )
+    supabase.auth.getSession()
+  }, [])
 
   const handleInput = () => {
     if (formRef.current) {
