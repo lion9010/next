@@ -27,11 +27,24 @@ export default function UpdatePasswordForm() {
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
+  const [sessionReady, setSessionReady] = useState(false)
 
-  useEffect(()=>{
-    const supabase = createClient()
-    supabase.auth.getSession()
-  }, [])
+  useEffect(() => {
+  const supabase = createClient()
+
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) {
+      setSessionReady(true)
+    } else {
+      console.error("No session found")
+    }
+  })
+}, [])
+
+if (!sessionReady) {
+  return <p>Cargando sesión...</p>
+}
+
 
   const handleInput = () => {
     if (formRef.current) {
