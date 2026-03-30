@@ -16,6 +16,8 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { UpdatePasswordFormState } from "@/app/lib/types";
 import { updatePassword } from "@/app/lib/actions/users/update-password";
 import { createClient } from "@/app/lib/supabase/client";
+import { useSearchParams } from 'next/navigation';
+import { getSupabaseBrowserClient } from "@/app/lib/supabase/browser";
 
 export default function UpdatePasswordForm() {
   const [state, action, isPending] = useActionState<
@@ -28,18 +30,28 @@ export default function UpdatePasswordForm() {
   const [visibleConfirm, setVisibleConfirm] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
   const [sessionReady, setSessionReady] = useState(false)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-  const supabase = createClient()
+    const supabase = getSupabaseBrowserClient()
+    const code = searchParams.get('code')
 
-  supabase.auth.getSession().then(({ data }) => {
-    if (data.session) {
-      setSessionReady(true)
-    } else {
-      console.error("No session found")
+    if (!code) {
+      console.error("No code found in URL")
+      return
     }
-  })
-}, [])
+
+    supabase.auth.exchangeCodeForSession(code).then(({ data, error }) => {
+      if (error) {
+        console.error("Error exchanging code:", error.message)
+        return
+      }
+
+      if (data.session) {
+        setSessionReady(true)
+      }
+    })
+  }, [searchParams])
 
 if (!sessionReady) {
   return <p>Cargando sesión...</p>
