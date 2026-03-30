@@ -30,17 +30,16 @@ export async function updatePassword(state: UpdatePasswordFormState, formData: F
     }
 
     const newPassword = validatedFields.data.password;
-    const supabase = await createClient();
-    const { data, error: sessionError } = await supabase.auth.getSession()
+    const supabase = await createClient(); 
 
-    if (!data || sessionError) {
-        return {
-            status: "error",
-            message: "Sesión inválida o expirada",
-        }
+    const { data, error } = await supabase.auth.updateUser({ password: newPassword })
+
+    if (error) {
+    return {
+      status: "error",
+      message: error.message,
     }
-
-    supabase.auth.updateUser({ password: newPassword })
+  }
 
     return { status: "success" }
 }
