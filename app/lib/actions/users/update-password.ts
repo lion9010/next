@@ -31,6 +31,7 @@ export async function updatePassword(state: UpdatePasswordFormState, formData: F
 
     const newPassword = validatedFields.data.password;
     const supabase = await createClient();
+    await supabase.auth.getSession()
     supabase.auth.updateUser({password: newPassword})
 
     return { status: "success" }
